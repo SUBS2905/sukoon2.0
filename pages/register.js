@@ -9,17 +9,23 @@ const Register = () => {
   const router = useRouter();
   const [form, setForm] = useState({});
   const [err, setErr] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleToggle = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setForm((values) => ({ ...values, [name]: value }));
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(form);
     try {
-      const res = await fetch("http://localhost:5000/user/signup", {
+      const res = await fetch(`http://localhost:5000/user/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -27,15 +33,15 @@ const Register = () => {
         body: JSON.stringify(form),
       });
 
-      if (res.status(200)) {
+      if (res.status === 201) {
         router.push("/");
-      } else {
-        setErr("Unable to register");
-        console.log(err);
+      } else if (res.status == 409) {
+        setErr("User already exists");
+        // console.log(err);
       }
     } catch (error) {
       setErr("Server Error");
-      console.log(err);
+      // console.log(err);
     }
   };
 
@@ -75,13 +81,28 @@ const Register = () => {
             />
             <input
               className="w-full text-black bg-inherit py-2 my-2 border-b border-gray-600 outline-none focus:outline-none focus:border-b-2"
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Password"
               name="password"
               onChange={handleChange}
             />
           </div>
-          <div className="w-full flex item-center justify-end my-2"></div>
+          <div className="w-full flex item-center justify-between my-2">
+            <label className="flex items-center text-sm">
+              Show Password
+              <input
+                className="mx-1 mt-1"
+                type="checkbox"
+                checked={showPassword}
+                onChange={handleToggle}
+              />
+            </label>
+          </div>
+          {err && (
+            <div className="w-full flex item-center justify-center my-2 text-red-600 font-semibold">
+              {err}
+            </div>
+          )}
           <div className="w-full flex items-center justify-center my-2">
             <button
               className="w-1/3 rounded-md p-2 text-white text-center bg-black"
