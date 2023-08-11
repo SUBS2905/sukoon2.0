@@ -4,6 +4,7 @@ import LoginImage from "@/public/assets/signin-art.jpg";
 import { GoogleIcon } from "@/components/icons";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 
 const Login = () => {
   const router = useRouter();
@@ -25,26 +26,29 @@ const Login = () => {
     e.preventDefault();
     // console.log(form);
     try {
-      const res = await fetch(`http://localhost:5000/user/signin`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
-      });
-
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URI}/user/signin`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(form),
+        }
+      );
+      const data = await res.json();
       if (res.status === 200) {
+        // console.log(data);
+        const token = data.user_token;
+        Cookies.set("userToken", token, { expires: 7 });
         router.push("/");
       } else if (res.status === 401) {
-        setErr("Invalid Credentials");
-        // console.log(err);
+        setErr(data.message);
       } else if (res.status === 404) {
-        setErr("User not found");
-        // console.log(err);
+        setErr(data.message);
       }
     } catch (error) {
-      setErr("Server Error");
-      // console.error(error);
+      console.error(error);
     }
   };
 

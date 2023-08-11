@@ -4,6 +4,7 @@ import Image from "next/image";
 import RegisterImage from "@/public/assets/signup-art.jpg";
 import { GoogleIcon } from "@/components/icons";
 import Link from "next/link";
+import Cookies from "js-cookie";
 
 const Register = () => {
   const router = useRouter();
@@ -25,23 +26,25 @@ const Register = () => {
     e.preventDefault();
     // console.log(form);
     try {
-      const res = await fetch(`http://localhost:5000/user/signup`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
-      });
-
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URI}/user/signup`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(form),
+        }
+      );
+      const data = await res.json();
       if (res.status === 201) {
+        Cookies.set("userToken", token, { expires: 7 });
         router.push("/");
-      } else if (res.status == 409) {
-        setErr("User already exists");
-        // console.log(err);
+      } else if (res.status === 409) {
+        setErr(data.message);
       }
     } catch (error) {
-      setErr("Server Error");
-      // console.log(err);
+      setErr(data.message);
     }
   };
 
@@ -52,6 +55,7 @@ const Register = () => {
           className="w-full h-full object-cover"
           src={RegisterImage}
           alt="register-image"
+          priority
         />
       </div>
       <div className="w-3/5 h-screen bg-gray-200 p-20 flex flex-col justify-between">
