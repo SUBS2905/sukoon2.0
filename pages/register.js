@@ -38,7 +38,7 @@ const Register = () => {
       );
       const data = await res.json();
       if (res.status === 201) {
-        Cookies.set("userToken", token, { expires: 7 });
+        Cookies.set("sessionToken", token, { expires: 7, secure: true });
         router.push("/");
       } else if (res.status === 409) {
         setErr(data.message);

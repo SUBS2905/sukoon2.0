@@ -40,7 +40,7 @@ const Login = () => {
       if (res.status === 200) {
         // console.log(data);
         const token = data.user_token;
-        Cookies.set("userToken", token, { expires: 7 });
+        Cookies.set("sessionToken", token, { expires: 7, secure: true });
         router.push("/");
       } else if (res.status === 401) {
         setErr(data.message);
