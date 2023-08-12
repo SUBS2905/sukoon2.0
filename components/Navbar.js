@@ -26,7 +26,9 @@ const Navbar = () => {
   return (
     <header className="w-full px-32 py-8 font-medium flex items-center justify-between">
       <div className="left-[50%] translate-x-[-50%]">
-        <h1 className="text-2xl font-bold">Sukoon</h1>
+        <Link href="/">
+          <h1 className="text-2xl font-bold">Sukoon</h1>
+        </Link>
       </div>
       <nav>
         <CustomLink
