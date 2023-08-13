@@ -1,10 +1,10 @@
 import Link from "next/link";
 import React from "react";
 import { useRouter } from "next/router";
+import useUserData from "@/hooks/useUserData";
 
 const CustomLink = ({ href, title, borderCol = "", className = "" }) => {
   const router = useRouter();
-
   const isActive = router.asPath === href;
 
   return (
@@ -23,6 +23,8 @@ const CustomLink = ({ href, title, borderCol = "", className = "" }) => {
 };
 
 const Navbar = () => {
+  const user = useUserData();
+  // console.log(user);
   return (
     <header className="w-full bg-gray-200 px-32 py-8 font-medium flex items-center justify-between">
       <div className="left-[50%]">
@@ -45,7 +47,7 @@ const Navbar = () => {
         />
         <CustomLink
           href="/register"
-          title="Get Started"
+          title={user ? user.username :"Get Started"}
           className="ml-4 text-white text-lg bg-blue-600 p-2 rounded"
         />
       </nav>
