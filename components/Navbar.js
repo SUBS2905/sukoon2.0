@@ -1,9 +1,10 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import useUserData from "@/hooks/useUserData";
+import useSignout from "@/hooks/useSignout";
 
-const CustomLink = ({ href, title, borderCol = "", className = "" }) => {
+const CustomLink = ({ href, title, className = "" }) => {
   const router = useRouter();
   const isActive = router.asPath === href;
 
@@ -11,7 +12,7 @@ const CustomLink = ({ href, title, borderCol = "", className = "" }) => {
     <Link href={href} className={`${className} relative group`}>
       {title}
       <span
-        className={`h-[2px] inline-block ${borderCol} absolute w-0 left-0 -bottom-0.5
+        className={`h-[2px] inline-block bg-black absolute w-0 left-0 -bottom-0.5
       group-hover:w-full transition-[width] ease duration-300 ${
         isActive ? "w-full" : "w-0"
       }`}
@@ -23,8 +24,16 @@ const CustomLink = ({ href, title, borderCol = "", className = "" }) => {
 };
 
 const Navbar = () => {
+  const router = useRouter();
   const user = useUserData();
+  const signout = useSignout();
   // console.log(user);
+  const [isDropdown, setDropdown] = useState(false);
+
+  const toggleDropdown = () => {
+    setDropdown(!isDropdown);
+  };
+
   return (
     <header className="w-full bg-gray-200 px-32 py-8 font-medium flex items-center justify-between">
       <div className="left-[50%]">
@@ -33,23 +42,28 @@ const Navbar = () => {
         </Link>
       </div>
       <nav>
-        <CustomLink
-          href="/"
-          title="Home"
-          borderCol="bg-black"
-          className="mr-4"
-        />
+        <CustomLink href="/" title="Home" className="mr-4" />
         <CustomLink
           href="/selfassessment"
           title="Self Assessment Tests"
-          borderCol="bg-black"
           className="mx-4"
         />
-        <CustomLink
-          href="/register"
-          title={user ? user.username :"Get Started"}
-          className="ml-4 text-white text-lg bg-blue-600 p-2 rounded"
-        />
+        <button
+          className="ml-4 text-white text-lg bg-blue-600 p-2 px-4 rounded"
+          onClick={user ? toggleDropdown : () => router.replace("/register")}
+        >
+          {user ? "Account" : "Get Started"}
+
+        </button>
+        {isDropdown && user && (
+          <div className="absolute right-[127px] z-10 flex justify-end">
+            <div className="w-[100px] mt-2 bg-white rounded shadow">
+              <p className="w-full p-1 pt-2 text-center font-bold rounded">{user.username}</p>
+              <button className="w-full p-1 pt-2 hover:bg-slate-300 rounded">Profile</button>
+              <button className="w-full p-1 pb-2 hover:bg-slate-300 rounded" onClick={signout}>Sign out</button>
+            </div>
+          </div>
+        )}
       </nav>
     </header>
   );
