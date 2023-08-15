@@ -11,17 +11,17 @@ const useUserData = () => {
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_SERVER_URI}/user/getuser`,
           {
-            method: "POST",
+            method: "GET",
             headers: {
               "Content-Type": "application/json",
+              "Authorization": `Bearer ${userToken}`,
             },
-            body: JSON.stringify({ user_token: userToken }),
           }
         );
 
         if (res.ok) {
-            const data = await res.json();
-            setUserData(data);
+          const data = await res.json();
+          setUserData(data);
         } else {
           setUserData(null);
         }
