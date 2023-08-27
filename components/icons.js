@@ -1,7 +1,8 @@
 import * as React from "react";
 
 export const GoogleIcon = ({ className, ...rest }) => (
-  <svg xmlns="http://www.w3.org/2000/svg"
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
     width={64}
     height={64}
     viewBox="-10 -10 64 64"
@@ -29,6 +30,49 @@ export const GoogleIcon = ({ className, ...rest }) => (
     </g>
   </svg>
 );
+export const SuccessIcon = ({ className, ...rest }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={256}
+    height={256}
+    viewBox="0 0 117 117"
+    {...rest}
+  >
+    <title />
+    <g fill="none" fillRule="nonzero" strokeWidth={0.001}>
+      <path
+        fill="#17AB13"
+        d="M34.5 55.1c-1.6-1.6-4.2-1.6-5.8 0-1.6 1.6-1.6 4.2 0 5.8l18.9 18.9c.8.8 1.8 1.2 2.9 1.2h.2c1.1-.1 2.2-.6 3-1.5L101 22.8c1.4-1.7 1.2-4.3-.5-5.8-1.7-1.4-4.3-1.2-5.8.5L50.2 70.8 34.5 55.1Z"
+      />
+      <path
+        fill="#000"
+        d="M89.1 9.3c-23-14.4-52.5-11-71.7 8.2-22.6 22.6-22.6 59.5 0 82.1a57.94 57.94 0 0 0 82 0c19.3-19.3 22.6-48.9 8.1-71.9-1.2-1.9-3.7-2.5-5.6-1.3-1.9 1.2-2.5 3.7-1.3 5.6 12.5 19.8 9.6 45.2-7 61.8-19.4 19.4-51.1 19.4-70.5 0s-19.4-51.1 0-70.5C39.7 6.8 65 3.9 84.8 16.2c1.9 1.2 4.4.6 5.6-1.3 1.2-1.9.6-4.4-1.3-5.6Z"
+      />
+    </g>
+  </svg>
+);
+export const FailedIcon = ({ className, ...rest }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={256}
+    height={256}
+    viewBox="0 0 117 117"
+    {...rest}
+  >
+    <title />
+    <g fill="none" fillRule="nonzero">
+      <path
+        fill="#000"
+        d="M58.5 116.6c32 0 58.1-26 58.1-58.1S90.5.4 58.5.4.4 26.5.4 58.5s26.1 58.1 58.1 58.1Zm0-108c27.5 0 49.9 22.4 49.9 49.9S86 108.4 58.5 108.4 8.6 86 8.6 58.5 31 8.6 58.5 8.6Z"
+      />
+      <path
+        fill="#f40b0b"
+        d="M36.7 79.7c.8.8 1.8 1.2 2.9 1.2 1.1 0 2.1-.4 2.9-1.2l16-16 16 16c.8.8 1.8 1.2 2.9 1.2 1.1 0 2.1-.4 2.9-1.2 1.6-1.6 1.6-4.2 0-5.8l-16-16 16-16c1.6-1.6 1.6-4.2 0-5.8-1.6-1.6-4.2-1.6-5.8 0l-16 16-16-16c-1.6-1.6-4.2-1.6-5.8 0-1.6 1.6-1.6 4.2 0 5.8l16 16-16 16c-1.6 1.6-1.6 4.2 0 5.8Z"
+      />
+    </g>
+  </svg>
+);
+
 export const GithubIcon = ({ className, ...rest }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
