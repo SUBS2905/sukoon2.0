@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-import { useRouter } from "next/router";
 import Image from "next/image";
 import RegisterImage from "@/public/assets/signup-art.jpg";
 import { GoogleIcon } from "@/components/icons";
 import Link from "next/link";
-import Cookies from "js-cookie";
 import Head from "next/head";
 
 const Register = () => {
-  const router = useRouter();
   const [form, setForm] = useState({});
   const [err, setErr] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -39,9 +36,7 @@ const Register = () => {
       );
       const data = await res.json();
       if (res.status === 201) {
-        const token = data.user_token;
-        Cookies.set("sessionToken", token, { expires: 7, secure: true });
-        router.push("/");
+        setErr(`Verification email sent to ${data.email}`)
       } else if (res.status === 409) {
         setErr(data.message);
       }
