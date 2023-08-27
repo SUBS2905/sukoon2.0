@@ -9,7 +9,7 @@ const useUserData = () => {
     async function fetchData() {
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_SERVER_URI}/user/getuser`,
+          `${process.env.NEXT_PUBLIC_SERVER_URI}/user/profile`,
           {
             method: "GET",
             headers: {
