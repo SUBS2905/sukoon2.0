@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 const useUserData = () => {
   const userToken = Cookies.get("sessionToken");
   const [userData, setUserData] = useState(null);
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
@@ -19,24 +20,28 @@ const useUserData = () => {
           }
         );
 
+        const data = await res.json();
         if (res.ok) {
-          const data = await res.json();
           setUserData(data);
-        } else {
-          setUserData(null);
+          setLoading(false);
+        }else{
+          console.log("Status: "+res.status);
+          setLoading(false);
         }
       } catch (err) {
         console.error(err);
-        setUserData(null);
+        setLoading(false);
       }
     }
 
     if (userToken) {
       fetchData();
+    }else{
+      setLoading(false);
     }
   }, [userToken]);
 
-  return userData;
+  return {userData, isLoading};
 };
 
 export default useUserData;

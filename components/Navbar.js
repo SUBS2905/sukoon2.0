@@ -25,7 +25,7 @@ const CustomLink = ({ href, title, className = "" }) => {
 
 const Navbar = () => {
   const router = useRouter();
-  const user = useUserData();
+  const {userData} = useUserData();
   const signout = useSignout();
   // console.log(user);
   const [isDropdown, setDropdown] = useState(false);
@@ -33,6 +33,10 @@ const Navbar = () => {
   const toggleDropdown = () => {
     setDropdown(!isDropdown);
   };
+
+  const handleProfile = ()=>{
+    router.push("/profile/view");
+  }
 
   return (
     <header className="w-full bg-gray-200 px-32 py-8 font-medium flex items-center justify-between">
@@ -50,16 +54,16 @@ const Navbar = () => {
         />
         <button
           className="ml-4 text-white text-lg bg-blue-600 p-2 px-4 rounded"
-          onClick={user ? toggleDropdown : () => router.replace("/register")}
+          onClick={userData ? toggleDropdown : () => router.replace("/register")}
         >
-          {user ? "Account" : "Get Started"}
+          {userData ? "Account" : "Get Started"}
 
         </button>
-        {isDropdown && user && (
+        {isDropdown && userData && (
           <div className="absolute right-[127px] z-10 flex justify-end">
             <div className="w-[100px] mt-2 bg-white rounded shadow">
-              <p className="w-full p-1 pt-2 text-center font-bold rounded">{user.username}</p>
-              <button className="w-full p-1 pt-2 hover:bg-slate-300 rounded">Profile</button>
+              <p className="w-full p-1 pt-2 text-center font-bold rounded">{userData.username}</p>
+              <button className="w-full p-1 pt-2 hover:bg-slate-300 rounded" onClick={handleProfile}>Profile</button>
               <button className="w-full p-1 pb-2 hover:bg-slate-300 rounded" onClick={signout}>Sign out</button>
             </div>
           </div>
