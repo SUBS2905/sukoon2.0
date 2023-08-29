@@ -1,6 +1,5 @@
 import Footer from "@/components/Footer";
 import Layout from "@/components/Layout";
-import LayoutDark from "@/components/LayoutDark";
 import Navbar from "@/components/Navbar";
 import TestCard from "@/components/TestCard";
 import Head from "next/head";
@@ -19,6 +18,7 @@ const SelfAssessmentTests = () => {
             <TestCard
               testname="GAD - 7"
               detail="The Generalised Anxiety Disorder Assessment (GAD-7) is a seven-item instrument that is used to measure or assess the severity of generalised anxiety disorder (GAD). The GAD-7 is a self-administered patient questionnaire."
+              href="/selfassessment/gad7"
             />
             <TestCard
               testname="PHQ - 9"

@@ -5,7 +5,7 @@ const TestCard = ({testname, detail, href}) => {
     <>
       <div className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow">
         <a href={href}>
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-black">
+          <h5 className="mb-2 text-2xl font-bold tracking-tight text-black cursor-pointer">
             {testname}
           </h5>
         </a>
@@ -14,7 +14,7 @@ const TestCard = ({testname, detail, href}) => {
         </p>
         <a
           href={href}
-          className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+          className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg cursor-pointer hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
         >
           Take Test
           <svg
@@ -26,9 +26,9 @@ const TestCard = ({testname, detail, href}) => {
           >
             <path
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               d="M1 5h12m0 0L9 1m4 4L9 9"
             />
           </svg>
