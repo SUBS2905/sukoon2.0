@@ -39,6 +39,11 @@ const SelfAssessmentTests = () => {
               testname="SPIN"
               detail="The Social Phobia Inventory (SPIN) is a self-report questionnaire for social anxiety disorder. It gauges the extent of fears and avoidance in social situations, aiding in understanding the impact of social anxiety."
             />
+            <TestCard
+              testname="PC-PTSD-5"
+              detail="The Primary Care PTSD Screen for DSM-5 (PC-PTSD-5) is a 5-item screen that was designed to identify individuals with probable PTSD in primary care settings."
+              href="/selfassessment/pcptsd5"
+            />
           </div>
         </Layout>
         <Footer className="bg-gray-700 text-white" />
