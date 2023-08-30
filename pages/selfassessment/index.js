@@ -27,11 +27,13 @@ const SelfAssessmentTests = () => {
             />
             <TestCard
               testname="BDI"
-              detail="The Beck Depression Inventory is a widely used self-report questionnaire that measures the presence and severity of depressive symptoms. It assesses cognitive, affective, and somatic symptoms of depression."
+              detail="The Beck's Depression Inventory is a widely used self-report questionnaire that measures the presence and severity of depressive symptoms. It assesses cognitive, affective, and somatic symptoms of depression."
+              href="/selfassessment/bdi"
             />
             <TestCard
               testname="STAI"
               detail="The State-Trait Anxiety Inventory questionnaire differentiates between state anxiety (temporary feelings of anxiety in response to a situation) and trait anxiety (general, long-standing anxiety tendencies)."
+              href="/selfassessment/stai"
             />
             <TestCard
               testname="SPIN"

@@ -46,12 +46,20 @@ const GAD7 = () => {
     else setResult("No Anxiety Disorder");
   }, [totalScore]);
 
-  const handleSubmit = (e) =>{
+  const handleSubmit = (e) => {
     e.preventDefault();
     setButtonClicked(true);
-    const data = {totalScore: totalScore, result: result};
+    let requireFurtherEvaluation = false;
+    if(totalScore >= 10)
+      requireFurtherEvaluation = true;
+    const data = {
+      testName: "GAD-7",
+      totalScore: totalScore,
+      result: result,
+      requireFurtherEvaluation: requireFurtherEvaluation,
+    };
     console.log(data);
-  }
+  };
 
   return (
     <>
@@ -71,6 +79,10 @@ const GAD7 = () => {
               severity of generalised anxiety disorder (GAD). The GAD-7 is a
               self-administered patient questionnaire.
             </p>
+            <h3 className="font-bold text-blue-700">
+              Over the last 2 weeks, how often have you been bothered by any of
+              the following problems?
+            </h3>
           </div>
           {questions.map((question, index) => (
             <QuestionComponent
@@ -100,7 +112,11 @@ const GAD7 = () => {
             </h1>
           </div>
           <div className="w-full flex justify-center items-center mt-8">
-            <button className="font-semibold text-white bg-black px-20 py-2 rounded-md" onClick={handleSubmit} disabled={buttonClicked}>
+            <button
+              className="font-semibold text-white bg-black px-20 py-2 rounded-md"
+              onClick={handleSubmit}
+              disabled={buttonClicked}
+            >
               Submit Results
             </button>
           </div>

@@ -42,18 +42,26 @@ const PHQ9 = () => {
 
   useEffect(() => {
     if (totalScore >= 20) setResult("Severe Depression");
-    else if (totalScore >= 15 && totalScore < 19)
+    else if (totalScore >= 15 && totalScore < 20)
       setResult("Moderately Severe Depression");
-    else if (totalScore >= 10 && totalScore < 14)
+    else if (totalScore >= 10 && totalScore < 15)
       setResult("Moderate Depression");
-    else if (totalScore >= 5 && totalScore < 9) setResult("Mild Depression");
+    else if (totalScore >= 5 && totalScore < 10) setResult("Mild Depression");
     else setResult("No Depression");
   }, [totalScore]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setButtonClicked(true);
-    const data = { totalScore: totalScore, result: result };
+    let requireFurtherEvaluation = false;
+    if (totalScore >= 10) requireFurtherEvaluation = true;
+
+    const data = {
+      testName: "PHQ-9",
+      totalScore: totalScore,
+      result: result,
+      requireFurtherEvaluation: requireFurtherEvaluation,
+    };
     console.log(data);
   };
 
@@ -73,6 +81,10 @@ const PHQ9 = () => {
               clinical practice and research to screen for and monitor
               depression.
             </p>
+            <h3 className="font-bold text-blue-700">
+              Over the last 2 weeks, how often have you been bothered by any of
+              the following problems?
+            </h3>
           </div>
           {questions.map((question, index) => (
             <QuestionComponent
