@@ -22,7 +22,8 @@ const SelfAssessmentTests = () => {
             />
             <TestCard
               testname="PHQ - 9"
-              detail="The Behavior Assessment System for Children, Third Edition (BASC-3) offers several different forms designed to aid in collecting information regarding at-risk adaptive behavioral and/or emotional problems."
+              detail="The Patient Health Questionnaire (PHQ-9) assesses the severity of depression symptoms based on nine items. It's widely used in clinical practice and research to screen for and monitor depression."
+              href="/selfassessment/phq9"
             />
             <TestCard
               testname="BDI"

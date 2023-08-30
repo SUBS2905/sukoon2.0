@@ -5,7 +5,7 @@ import Layout from "@/components/Layout";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const SelfAssessmentTests = () => {
+const GAD7 = () => {
   const [result, setResult] = useState("");
   const [buttonClicked, setButtonClicked] = useState(false);
 
@@ -111,4 +111,4 @@ const SelfAssessmentTests = () => {
   );
 };
 
-export default SelfAssessmentTests;
+export default GAD7;
