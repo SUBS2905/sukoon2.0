@@ -1,5 +1,6 @@
 import Layout from "@/components/Layout";
 import Navbar from "@/components/Navbar";
+import { SadIcon } from "@/components/icons";
 import useUserData from "@/hooks/useUserData";
 import { formatDate } from "@/utils/utils";
 import Head from "next/head";
@@ -16,8 +17,8 @@ const ViewProfile = () => {
   if (isLoading) {
     return <div>Please Wait...</div>;
   }
-  
-  if (userData) {
+  // console.log(userData);
+  if (userData.profile) {
     const formattedDate = formatDate(userData.profile.dob);
     return (
       <>
@@ -88,6 +89,35 @@ const ViewProfile = () => {
               </button>
             </div>
           </Layout>
+        </main>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <Head>
+          <title>Sukoon | View Profile</title>
+        </Head>
+        <main className="flex flex-col w-full min-h-screen pt-16 bg-gray-200">
+          <div className="w-full flex justify-center p-8">
+            <SadIcon />
+          </div>
+          <div className="w-full flex flex-col items-center justify-center">
+            <h1 className="text-2xl font-bold my-4">
+              It&apos;s quite empty in here!
+            </h1>
+            <h3 className="text-lg font-semibold my-4">
+              Make yourself home by creating your profile 😊
+            </h3>
+          </div>
+          <div className="w-full flex justify-center items-center mt-4">
+            <button
+              className="bg-black text-white font-semibold py-2 rounded-lg px-16"
+              onClick={handleClick}
+            >
+              Create your profile
+            </button>
+          </div>
         </main>
       </>
     );

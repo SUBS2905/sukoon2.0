@@ -2,10 +2,12 @@ import Layout from "@/components/Layout";
 import Navbar from "@/components/Navbar";
 import Cookies from "js-cookie";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 const UpdateProfile = () => {
   const userToken = Cookies.get("sessionToken");
+  const router = useRouter();
   const [form, setForm] = useState({});
 
   const handleChange = (e) => {
@@ -14,8 +16,7 @@ const UpdateProfile = () => {
     setForm((values) => ({ ...values, [name]: value }));
   };
 
-  const handleSubmit = async (e) =>{
-
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(form);
     try {
@@ -25,17 +26,18 @@ const UpdateProfile = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${userToken}`,
+            Authorization: `Bearer ${userToken}`,
           },
           body: JSON.stringify(form),
         }
       );
       const data = await res.json();
       console.log(data);
-    }catch(err){
-
+      router.replace("/profile/view");
+    } catch (err) {
+      console.log(err);
     }
-  }
+  };
 
   return (
     <>
@@ -87,7 +89,9 @@ const UpdateProfile = () => {
             {/* Right half */}
             <div className="w-1/2">
               <div className="flex flex-col w-3/4 mt-20">
-                <label className="font-semibold text-sm text-gray-600">Last Name</label>
+                <label className="font-semibold text-sm text-gray-600">
+                  Last Name
+                </label>
                 <input
                   type="text"
                   name="lastname"
@@ -155,7 +159,12 @@ const UpdateProfile = () => {
             </div>
           </div>
           <div className="w-full mt-4 flex items-center justify-center">
-            <button className="bg-black text-white py-2 px-16 rounded-lg" onClick={handleSubmit}>Update Profile</button>
+            <button
+              className="bg-black text-white py-2 px-16 rounded-lg"
+              onClick={handleSubmit}
+            >
+              Update Profile
+            </button>
           </div>
         </Layout>
       </main>
