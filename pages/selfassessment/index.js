@@ -26,9 +26,9 @@ const SelfAssessmentTests = () => {
               href="/selfassessment/phq9"
             />
             <TestCard
-              testname="BDI"
-              detail="The Beck's Depression Inventory is a widely used self-report questionnaire that measures the presence and severity of depressive symptoms. It assesses cognitive, affective, and somatic symptoms of depression."
-              href="/selfassessment/bdi"
+              testname="K-10"
+              detail="Kessler Psychological Distress Scale is a 10-item questionnaire intended to yield a global measure of distress based on questions about anxiety and depressive symptoms that a person has experienced in the past 4 weeks."
+              href="/selfassessment/k10"
             />
             <TestCard
               testname="STAI"
