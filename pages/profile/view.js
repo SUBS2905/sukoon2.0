@@ -1,18 +1,24 @@
 import Layout from "@/components/Layout";
 import Navbar from "@/components/Navbar";
 import { SadIcon } from "@/components/icons";
+import useProtectedRoute from "@/hooks/useProtectedRoute";
 import useUserData from "@/hooks/useUserData";
 import { formatDate } from "@/utils/utils";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
 const ViewProfile = () => {
+  const userToken = useProtectedRoute();
   const router = useRouter();
   const { userData, isLoading } = useUserData();
 
   const handleClick = () => {
     router.replace("/profile/update");
   };
+
+  if(!userToken){
+    return null;
+  }
 
   if (isLoading) {
     return <div>Please Wait...</div>;

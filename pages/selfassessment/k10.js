@@ -5,10 +5,10 @@ import Layout from "@/components/Layout";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import usePostTestData from "@/hooks/usePostTestData";
-import Cookies from "js-cookie";
+import useProtectedRoute from "@/hooks/useProtectedRoute";
 
 const K10 = () => {
-  const userToken = Cookies.get("sessionToken");
+  const userToken = useProtectedRoute();
   const [result, setResult] = useState("");
   const [formData, setFormData] = useState({});
   const [buttonClicked, setButtonClicked] = useState(false);

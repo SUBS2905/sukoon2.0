@@ -1,10 +1,12 @@
 import { FailedIcon, SuccessIcon } from "@/components/icons";
+import useProtectedRoute from "@/hooks/useProtectedRoute";
 import useVerifyUser from "@/hooks/useVerifyUser";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 const VerifyEmail = () => {
+  useProtectedRoute();
   const router = useRouter();
   const { vtoken } = router.query;
   const verify = useVerifyUser({ vtoken });

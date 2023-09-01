@@ -1,15 +1,19 @@
 import Layout from "@/components/Layout";
 import Navbar from "@/components/Navbar";
-import Cookies from "js-cookie";
+import useProtectedRoute from "@/hooks/useProtectedRoute";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 const UpdateProfile = () => {
-  const userToken = Cookies.get("sessionToken");
+  const userToken = useProtectedRoute();
   const router = useRouter();
   const [form, setForm] = useState({});
 
+  if(!userToken){
+    return null;
+  }
+  
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;

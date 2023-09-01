@@ -4,11 +4,11 @@ import Head from "next/head";
 import Layout from "@/components/Layout";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import Cookies from "js-cookie";
 import usePostTestData from "@/hooks/usePostTestData";
+import useProtectedRoute from "@/hooks/useProtectedRoute";
 
 const PHQ9 = () => {
-  const userToken = Cookies.get("sessionToken");
+  const userToken = useProtectedRoute();
   const [result, setResult] = useState("");
   const [formData, setFormData] = useState({});
   const [buttonClicked, setButtonClicked] = useState(false);
