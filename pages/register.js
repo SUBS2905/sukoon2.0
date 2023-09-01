@@ -120,13 +120,9 @@ const Register = () => {
             <div className="w-full flex items-center justify-center relative">
               <div className="w-full h-[1.5px] bg-gray-400 my-4"></div>
             </div>
-            <div className="w-full flex items-center justify-center my-2">
-              <div className="w-1/3 rounded-md p-2 text-black text-center bg-white flex items-center justify-center cursor-pointer">
-                <div className="w-6 h-6 mr-2">
-                  <GoogleIcon />
-                </div>
-                <span>Sign up with Google</span>
-              </div>
+            <div className="w-full flex flex-col items-center justify-center my-2 px-28 gap-2">
+              <p className="font-semibold">&ldquo;There is hope, even when your brain tells you there isn&apos;t&rdquo;</p>
+              <p className="self-end font-semibold text-sm px-8">-John Green</p>
             </div>
           </div>
           <div className="w-full flex items-center justify-center max-w-[700px]">

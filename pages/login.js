@@ -124,13 +124,9 @@ const Login = () => {
             <div className="w-full flex items-center justify-center relative">
               <div className="w-full h-[1.5px] bg-gray-400 my-4"></div>
             </div>
-            <div className="w-full flex items-center justify-center my-2">
-              <div className="w-1/3 rounded-md p-2 text-black text-center bg-white flex items-center justify-center cursor-pointer">
-                <div className="w-6 h-6 mr-2">
-                  <GoogleIcon />
-                </div>
-                <span>Sign in with Google</span>
-              </div>
+            <div className="w-full flex flex-col items-center justify-center my-2 px-36 gap-4">
+              <p className="font-semibold">&ldquo;Mental Health... is not a destination but a process&rdquo;</p>
+              <p className="self-end font-semibold text-sm px-4">-Noam Shpancer</p>
             </div>
           </div>
           <div className="w-full flex items-center justify-center max-w-[700px]">
