@@ -4,10 +4,16 @@ import Head from "next/head";
 import Layout from "@/components/Layout";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Cookies from "js-cookie";
+import usePostTestData from "@/hooks/usePostTestData";
 
 const PHQ9 = () => {
+  const userToken = Cookies.get("sessionToken");
   const [result, setResult] = useState("");
+  const [formData, setFormData] = useState({});
   const [buttonClicked, setButtonClicked] = useState(false);
+
+  const { message } = usePostTestData(formData, userToken);
 
   const options = [
     { value: 0, label: "Not at all" },
@@ -40,6 +46,20 @@ const PHQ9 = () => {
 
   const totalScore = selectedOptions.reduce((acc, value) => acc + value, 0);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setButtonClicked(true);
+    let requireFurtherEvaluation = false;
+    if (totalScore >= 10) requireFurtherEvaluation = true;
+
+    setFormData({
+      testName: "PHQ-9",
+      testScore: totalScore,
+      testResult: result,
+      requireFurtherEvaluation: requireFurtherEvaluation,
+    });
+  };
+
   useEffect(() => {
     if (totalScore >= 20) setResult("Severe Depression");
     else if (totalScore >= 15 && totalScore < 20)
@@ -49,21 +69,6 @@ const PHQ9 = () => {
     else if (totalScore >= 5 && totalScore < 10) setResult("Mild Depression");
     else setResult("No Depression");
   }, [totalScore]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setButtonClicked(true);
-    let requireFurtherEvaluation = false;
-    if (totalScore >= 10) requireFurtherEvaluation = true;
-
-    const data = {
-      testName: "PHQ-9",
-      totalScore: totalScore,
-      result: result,
-      requireFurtherEvaluation: requireFurtherEvaluation,
-    };
-    console.log(data);
-  };
 
   return (
     <>
@@ -113,7 +118,10 @@ const PHQ9 = () => {
               {result}
             </h1>
           </div>
-          <div className="w-full flex justify-center items-center mt-8">
+          <div className="w-full flex flex-col justify-center items-center mt-8">
+            {message && (
+              <h3 className="font-semibold p-4 text-green-500">{message}</h3>
+            )}
             <button
               className="font-semibold text-white bg-black px-20 py-2 rounded-md"
               onClick={handleSubmit}

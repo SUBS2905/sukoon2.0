@@ -4,10 +4,16 @@ import Head from "next/head";
 import Layout from "@/components/Layout";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Cookies from "js-cookie";
+import usePostTestData from "@/hooks/usePostTestData";
 
 const STAI = () => {
+  const userToken = Cookies.get("sessionToken");
   const [result, setResult] = useState("");
+  const [formData, setFormData] = useState({});
   const [buttonClicked, setButtonClicked] = useState(false);
+
+  const { message } = usePostTestData(formData, userToken);
 
   const options = [
     { value: 1, label: "Not at all" },
@@ -64,13 +70,12 @@ const STAI = () => {
     let requireFurtherEvaluation = false;
     if (totalScore >= 10) requireFurtherEvaluation = true;
 
-    const data = {
+    setFormData({
       testName: "STAI",
-      totalScore: totalScore,
-      result: result,
+      testScore: totalScore,
+      testResult: result,
       requireFurtherEvaluation: requireFurtherEvaluation,
-    };
-    console.log(data);
+    });
   };
 
   return (
@@ -123,7 +128,10 @@ const STAI = () => {
               {result}
             </h1>
           </div>
-          <div className="w-full flex justify-center items-center mt-8">
+          <div className="w-full flex flex-col justify-center items-center mt-8">
+            {message && (
+              <h3 className="font-semibold p-4 text-green-500">{message}</h3>
+            )}
             <button
               className="font-semibold text-white bg-black px-20 py-2 rounded-md"
               onClick={handleSubmit}

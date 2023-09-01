@@ -4,10 +4,16 @@ import Head from "next/head";
 import Layout from "@/components/Layout";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import usePostTestData from "@/hooks/usePostTestData";
+import Cookies from "js-cookie";
 
 const K10 = () => {
+  const userToken = Cookies.get("sessionToken");
   const [result, setResult] = useState("");
+  const [formData, setFormData] = useState({});
   const [buttonClicked, setButtonClicked] = useState(false);
+
+  const { message } = usePostTestData(formData, userToken);
 
   const options = [
     { value: 1, label: "None of the time" },
@@ -57,13 +63,12 @@ const K10 = () => {
     let requireFurtherEvaluation = false;
     if (totalScore >= 25) requireFurtherEvaluation = true;
 
-    const data = {
+    setFormData({
       testName: "K-10",
-      totalScore: totalScore,
-      result: result,
+      testScore: totalScore,
+      testResult: result,
       requireFurtherEvaluation: requireFurtherEvaluation,
-    };
-    console.log(data);
+    });
   };
 
   return (
@@ -86,8 +91,8 @@ const K10 = () => {
             </p>
             <h3 className="font-bold text-blue-700">
               These questions concern how you have been feeling over the past 30
-              days. Select an option for each question that best represents how you
-              have been.
+              days. Select an option for each question that best represents how
+              you have been.
             </h3>
           </div>
           {questions.map((question, index) => (
@@ -117,7 +122,10 @@ const K10 = () => {
               {result}
             </h1>
           </div>
-          <div className="w-full flex justify-center items-center mt-8">
+          <div className="w-full flex flex-col justify-center items-center mt-8">
+            {message && (
+              <h3 className="font-semibold p-4 text-green-500">{message}</h3>
+            )}
             <button
               className="font-semibold text-white bg-black px-20 py-2 rounded-md"
               onClick={handleSubmit}
