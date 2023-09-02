@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import RegisterImage from "@/public/assets/signup-art.jpg";
-import { GoogleIcon } from "@/components/icons";
 import Link from "next/link";
 import Head from "next/head";
 

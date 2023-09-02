@@ -1,9 +1,7 @@
 import Cookies from "js-cookie";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const useVerifyUser = ({ vtoken }) => {
-  const router = useRouter();
   const [verify, setVerify] = useState(false);
 
   useEffect(() => {
@@ -37,7 +35,7 @@ const useVerifyUser = ({ vtoken }) => {
     if (vtoken) {
       verifyUser();
     }
-  }, [vtoken, router]);
+  }, [vtoken]);
 
   return verify;
 };
