@@ -103,9 +103,9 @@ const Login = () => {
                   onChange={handleToggle}
                 />
               </label>
-              <p className="text-sm font-semibold underline underline-offset-2 cursor-pointer my-2">
+              <Link className="text-sm font-semibold underline underline-offset-2 cursor-pointer my-2" href="/forgot-password">
                 Forgot Password
-              </p>
+              </Link>
             </div>
             {err && (
               <div className="w-full flex item-center justify-center my-2 text-red-600 font-semibold">
