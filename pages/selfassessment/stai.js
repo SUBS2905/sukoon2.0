@@ -4,16 +4,14 @@ import Head from "next/head";
 import Layout from "@/components/Layout";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import usePostTestData from "@/hooks/usePostTestData";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
+import { postTestData } from "@/utils/postTestData";
 
 const STAI = () => {
   const userToken = useProtectedRoute();
   const [result, setResult] = useState("");
-  const [formData, setFormData] = useState({});
+  const [message, setMessage] = useState("");
   const [buttonClicked, setButtonClicked] = useState(false);
-
-  const { message } = usePostTestData(formData, userToken);
 
   const options = [
     { value: 1, label: "Not at all" },
@@ -64,18 +62,21 @@ const STAI = () => {
     else setResult("Low or No anxiety");
   }, [totalScore]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setButtonClicked(true);
     let requireFurtherEvaluation = false;
     if (totalScore >= 10) requireFurtherEvaluation = true;
 
-    setFormData({
+    const formData = {
       testName: "STAI",
       testScore: totalScore,
       testResult: result,
       requireFurtherEvaluation: requireFurtherEvaluation,
-    });
+    };
+
+    const val = postTestData(formData, userToken);
+    setMessage(val);
   };
 
   return (

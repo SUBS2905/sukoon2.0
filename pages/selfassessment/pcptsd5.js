@@ -4,16 +4,14 @@ import Head from "next/head";
 import Layout from "@/components/Layout";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import usePostTestData from "@/hooks/usePostTestData";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
+import { postTestData } from "@/utils/postTestData";
 
 const PCPTSD5 = () => {
   const userToken = useProtectedRoute();
   const [result, setResult] = useState("");
-  const [formData, setFormData] = useState({});
+  const [message, setMessage] = useState("");
   const [buttonClicked, setButtonClicked] = useState(false);
-
-  const {message} = usePostTestData(formData, userToken);
 
   const options = [
     { value: 0, label: "No" },
@@ -51,12 +49,15 @@ const PCPTSD5 = () => {
     let requireFurtherEvaluation = false;
     if (totalScore >= 3) requireFurtherEvaluation = true;
 
-    setFormData({
+    const formData = {
       testName: "PC-PTSD-5",
       testScore: totalScore,
       testResult: result,
       requireFurtherEvaluation: requireFurtherEvaluation,
-    });
+    };
+
+    const val = await postTestData(formData, userToken);
+    setMessage(val);
   };
 
   useEffect(() => {
@@ -123,9 +124,7 @@ const PCPTSD5 = () => {
           </div>
           <div className="w-full flex flex-col justify-center items-center mt-8">
             {message && (
-              <h3 className="font-semibold p-4 text-green-500">
-                {message}
-              </h3>
+              <h3 className="font-semibold p-4 text-green-500">{message}</h3>
             )}
             <button
               className="font-semibold text-white bg-black px-20 py-2 rounded-md"
