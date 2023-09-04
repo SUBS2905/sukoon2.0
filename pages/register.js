@@ -3,14 +3,25 @@ import Image from "next/image";
 import RegisterImage from "@/public/assets/signup-art.jpg";
 import Link from "next/link";
 import Head from "next/head";
+import { Switch } from "@mui/material";
 
 const Register = () => {
   const [form, setForm] = useState({});
   const [err, setErr] = useState("");
+  const [checked, setChecked] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   const handleToggle = () => {
     setShowPassword(!showPassword);
+  };
+
+  const handleSwitch = () => {
+    setChecked(!checked);
+
+    setForm((prevForm) => ({
+      ...prevForm,
+      isProfessional: !checked,
+    }));
   };
 
   const handleChange = (e) => {
@@ -22,6 +33,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(form);
+
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URI}/user/signup`,
@@ -35,7 +47,7 @@ const Register = () => {
       );
       const data = await res.json();
       if (res.status === 201) {
-        setErr(`Verification email sent to ${data.email}`)
+        setErr(`Verification email sent to ${data.email}`);
       } else if (res.status === 409) {
         setErr(data.message);
       }
@@ -101,6 +113,12 @@ const Register = () => {
                   onChange={handleToggle}
                 />
               </label>
+              <div className="flex items-center">
+                <Switch checked={checked} onChange={handleSwitch} />
+                <label className="font-semibold text-sm">
+                  Mental Health Professional
+                </label>
+              </div>
             </div>
             {err && (
               <div className="w-full flex item-center justify-center my-2 text-red-600 font-semibold">
@@ -120,7 +138,10 @@ const Register = () => {
               <div className="w-full h-[1.5px] bg-gray-400 my-4"></div>
             </div>
             <div className="w-full flex flex-col items-center justify-center my-2 px-28 gap-2">
-              <p className="font-semibold">&ldquo;There is hope, even when your brain tells you there isn&apos;t&rdquo;</p>
+              <p className="font-semibold">
+                &ldquo;There is hope, even when your brain tells you there
+                isn&apos;t&rdquo;
+              </p>
               <p className="self-end font-semibold text-sm px-8">-John Green</p>
             </div>
           </div>
