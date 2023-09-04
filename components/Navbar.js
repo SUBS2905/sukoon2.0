@@ -34,7 +34,11 @@ const Navbar = () => {
   };
 
   const handleProfile = () => {
-    router.push("/profile/view");
+    if(userData?.isProfessional)
+      router.push("/profile/viewProfessional");
+    else
+      router.push("/profile/view");
+
   };
 
   return (
