@@ -59,7 +59,7 @@ const ViewProfile = () => {
                     License Number
                   </label>
                   <h1 className="bg-transparent py-2 mb-8 font-semibold">
-                    {userData.professional.licence_number}
+                    {userData.professional.license_number}
                   </h1>
 
                   <label className="font-semibold text-sm text-gray-600">
@@ -73,16 +73,9 @@ const ViewProfile = () => {
                     Speciality
                   </label>
                   <div>
-                    {userData.professional.speciality.map(
-                      (speciality, index) => (
-                        <span
-                          key={index}
-                          className="bg-transparent py-2 mb-2 font-semibold"
-                        >
-                          {speciality},&nbsp;
-                        </span>
-                      )
-                    )}
+                    <p className="font-semibold">
+                      {userData.professional.speciality.join(", ")}
+                    </p>
                   </div>
                 </div>
               </div>
