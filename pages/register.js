@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import RegisterImage from "@/public/assets/signup-art.jpg";
 import Link from "next/link";
@@ -30,33 +30,49 @@ const Register = () => {
     setForm((values) => ({ ...values, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // console.log(form);
+  
+  const handleSubmit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      // console.log(form);
 
-    try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_URI}/user/signup`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(form),
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_SERVER_URI}/user/signup`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(form),
+          }
+          );
+          const data = await res.json();
+        if (res.status === 201) {
+          setErr(`Verification email sent to ${data.email}`);
+        } else if (res.status === 409) {
+          setErr(data.message);
         }
-      );
-      const data = await res.json();
-      if (res.status === 201) {
-        setErr(`Verification email sent to ${data.email}`);
-      } else if (res.status === 409) {
-        setErr(data.message);
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+    }, [form]);
+    
+    const handleKeyDown = useCallback((e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          handleSubmit(e);
+        }
+    },[handleSubmit]);
 
-  return (
+    useEffect(() => {
+      document.addEventListener("keydown", handleKeyDown);
+      return () => {
+        document.removeEventListener("keydown", handleKeyDown);
+      };
+    }, [handleKeyDown]);
+    
+    return (
     <>
       <Head>
         <title>Sukoon | Register</title>
@@ -129,6 +145,7 @@ const Register = () => {
               <button
                 className="w-1/3 rounded-md p-2 text-white text-center bg-black"
                 onClick={handleSubmit}
+                onKeyDown={handleKeyDown}
               >
                 Register
               </button>

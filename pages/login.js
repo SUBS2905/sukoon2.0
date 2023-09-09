@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import LoginImage from "@/public/assets/signin-art.jpg";
-import { GoogleIcon } from "@/components/icons";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
@@ -17,13 +16,14 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
+  
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setForm((values) => ({ ...values, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
     // console.log(form);
     try {
@@ -51,8 +51,22 @@ const Login = () => {
     } catch (error) {
       console.error(error);
     }
-  };
-
+  },[form, router])
+  
+  const handleKeyDown = useCallback((e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        handleSubmit(e);
+      }
+    },[handleSubmit]);
+    
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleKeyDown]);
+  
   return (
     <>
       <Head>
@@ -103,7 +117,10 @@ const Login = () => {
                   onChange={handleToggle}
                 />
               </label>
-              <Link className="text-sm font-semibold underline underline-offset-2 cursor-pointer my-2" href="/forgot-password">
+              <Link
+                className="text-sm font-semibold underline underline-offset-2 cursor-pointer my-2"
+                href="/forgot-password"
+              >
                 Forgot Password
               </Link>
             </div>
@@ -116,6 +133,7 @@ const Login = () => {
               <button
                 className="w-1/3 rounded-md p-2 text-white text-center bg-black"
                 onClick={handleSubmit}
+                onKeyDown={handleKeyDown}
               >
                 Login
               </button>
@@ -125,8 +143,13 @@ const Login = () => {
               <div className="w-full h-[1.5px] bg-gray-400 my-4"></div>
             </div>
             <div className="w-full flex flex-col items-center justify-center my-2 px-36 gap-4">
-              <p className="font-semibold">&ldquo;Mental Health... is not a destination but a process&rdquo;</p>
-              <p className="self-end font-semibold text-sm px-4">-Noam Shpancer</p>
+              <p className="font-semibold">
+                &ldquo;Mental Health... is not a destination but a
+                process&rdquo;
+              </p>
+              <p className="self-end font-semibold text-sm px-4">
+                -Noam Shpancer
+              </p>
             </div>
           </div>
           <div className="w-full flex items-center justify-center max-w-[700px]">
