@@ -1,15 +1,41 @@
+import Footer from "@/components/Footer";
 import Layout from "@/components/Layout";
 import Navbar from "@/components/Navbar";
+import useProtectedRoute from "@/hooks/useProtectedRoute";
 import { formatDate } from "@/utils/utils";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const ProfessionalDetails = () => {
+  const userToken = useProtectedRoute();
   const router = useRouter();
   const { id } = router.query;
   const [professionalDetails, setProfessionalDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [emailSent, setEmailSent] = useState("");
+
+  const handleNotify = async () => {
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URI}/professional/${id}/notify`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+      if (res.status === 200) {
+        setIsLoading(false);
+        setEmailSent("Professional notified!");
+      }
+    } catch (err) {
+      console.log(err);
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -65,21 +91,21 @@ const ProfessionalDetails = () => {
                   Contact Number
                 </label>
                 <h1 className="bg-transparent py-2 mb-8 font-semibold">
-                {professionalDetails.contact}
+                  {professionalDetails.contact}
                 </h1>
 
                 <label className="font-semibold text-sm text-gray-600">
                   License Number
                 </label>
                 <h1 className="bg-transparent py-2 mb-8 font-semibold">
-                {professionalDetails.license_number}
+                  {professionalDetails.license_number}
                 </h1>
 
                 <label className="font-semibold text-sm text-gray-600">
                   Date of Birth
                 </label>
                 <h1 className="bg-transparent py-2 mb-8 font-semibold">
-                {formattedDate}
+                  {formattedDate}
                 </h1>
 
                 <label className="font-semibold text-sm text-gray-600">
@@ -99,33 +125,43 @@ const ProfessionalDetails = () => {
                   Last Name
                 </label>
                 <h1 className="bg-transparent py-2 mb-8 font-semibold">
-                {professionalDetails.lastname}
+                  {professionalDetails.lastname}
                 </h1>
 
                 <label className="font-semibold text-sm text-gray-600">
                   Experience (in years)
                 </label>
                 <h1 className="bg-transparent py-2 mb-8 font-semibold">
-                {professionalDetails.experience}
+                  {professionalDetails.experience}
                 </h1>
 
                 <label className="font-semibold text-sm text-gray-600">
                   Licensing Authority
                 </label>
                 <h1 className="bg-transparent py-2 mb-8 font-semibold">
-                {professionalDetails.licensing_authority}
+                  {professionalDetails.licensing_authority}
                 </h1>
 
                 <label className="font-semibold text-sm text-gray-600">
                   Gender
                 </label>
                 <h1 className="bg-transparent py-2 mb-8 font-semibold">
-                {professionalDetails.gender}
+                  {professionalDetails.gender}
                 </h1>
               </div>
             </div>
           </div>
+          <div className="w-full flex flex-col items-center justify-center mt-8">
+            <p className="font-semibold text-red-600 py-2">{emailSent}</p>
+            <button
+              className="bg-black text-white font-semibold p-2 px-16 rounded-md"
+              onClick={handleNotify}
+            >
+              Notify
+            </button>
+          </div>
         </Layout>
+        <Footer className="bg-gray-700 text-white" />
       </main>
     </>
   );
