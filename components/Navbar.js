@@ -64,6 +64,13 @@ const Navbar = () => {
             className="mx-4"
           />
         )}
+        {(userData?.isProfessional === true) && (
+          <CustomLink
+            href="/clients"
+            title="Clients"
+            className="mx-4"
+          />
+        )}
         <button
           className="ml-4 text-white text-lg bg-blue-600 p-2 px-4 rounded"
           onClick={
