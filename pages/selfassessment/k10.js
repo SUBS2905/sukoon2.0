@@ -64,6 +64,7 @@ const K10 = () => {
     const formData = {
       testName: "K-10",
       testScore: totalScore,
+      maxScore: 50,
       testResult: result,
       requireFurtherEvaluation: requireFurtherEvaluation,
     };

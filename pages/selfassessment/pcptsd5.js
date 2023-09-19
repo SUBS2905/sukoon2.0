@@ -52,6 +52,7 @@ const PCPTSD5 = () => {
     const formData = {
       testName: "PC-PTSD-5",
       testScore: totalScore,
+      maxScore: 5,
       testResult: result,
       requireFurtherEvaluation: requireFurtherEvaluation,
     };

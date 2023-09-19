@@ -71,6 +71,7 @@ const STAI = () => {
     const formData = {
       testName: "STAI",
       testScore: totalScore,
+      maxScore: 80,
       testResult: result,
       requireFurtherEvaluation: requireFurtherEvaluation,
     };

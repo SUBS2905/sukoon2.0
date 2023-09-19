@@ -37,7 +37,6 @@ const Clients = () => {
   }, [userToken]);
 
   useEffect(() => {
-    
     const getClientDetails = async (clientId) => {
       try {
         const res = await fetch(
@@ -57,6 +56,7 @@ const Clients = () => {
           return await getClientDetails(clientId);
         })
       );
+      console.log(details);
       setClientInfo(details);
     };
 
@@ -74,7 +74,11 @@ const Clients = () => {
         <Navbar />
         <Layout className="pt-8">
           {clientInfo.map((client, index) => (
-            <ClientCard key={index} client={client.profile} />
+            <ClientCard
+              key={index}
+              client={client.profile}
+              href={`/clients/${client._id}/`}
+            />
           ))}
         </Layout>
         <Footer className="bg-gray-700 text-white" />

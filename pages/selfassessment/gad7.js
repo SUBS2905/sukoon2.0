@@ -51,6 +51,7 @@ const GAD7 = () => {
     const formData = {
       testName: "GAD-7",
       testScore: totalScore,
+      maxScore: 21,
       testResult: result,
       requireFurtherEvaluation: requireFurtherEvaluation,
     };

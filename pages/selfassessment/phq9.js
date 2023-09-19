@@ -53,6 +53,7 @@ const PHQ9 = () => {
     const formData = {
       testName: "PHQ-9",
       testScore: totalScore,
+      maxScore: 27,
       testResult: result,
       requireFurtherEvaluation: requireFurtherEvaluation,
     };

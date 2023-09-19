@@ -62,6 +62,7 @@ const SPIN = () => {
     const formData = {
       testName: "SPIN",
       testScore: totalScore,
+      maxScore: 68,
       testResult: result,
       requireFurtherEvaluation: requireFurtherEvaluation,
     };
