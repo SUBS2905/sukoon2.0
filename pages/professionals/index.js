@@ -3,13 +3,16 @@ import Layout from "@/components/Layout";
 import Navbar from "@/components/Navbar";
 import ProfessionalCard from "@/components/ProfessionalCard";
 import { SadIcon } from "@/components/icons";
+import useProtectedRoute from "@/hooks/useProtectedRoute";
 import useUserData from "@/hooks/useUserData";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const Professionals = () => {
+  const sessionToken = useProtectedRoute();
+  const router = useRouter();
   const { userData, isLoading } = useUserData();
-  let associated_professionals;
   const [professionalsData, setProfessionalsData] = useState([]);
 
   useEffect(() => {
@@ -28,7 +31,10 @@ const Professionals = () => {
     fetchProfessionals();
   }, []);
 
-  if (isLoading) {
+  let associated_professionals;
+  if (!sessionToken) {
+    router.replace("/login");
+  } else if (isLoading) {
     <div>Loading...</div>;
   } else {
     associated_professionals = userData.profile.associated_professionals;

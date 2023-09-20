@@ -120,7 +120,7 @@ const UpdateProfile = () => {
                     <input
                       type="radio"
                       name="gender"
-                      value="male"
+                      value="Male"
                       onChange={handleChange}
                       className="cursor-pointer"
                     />
@@ -130,7 +130,7 @@ const UpdateProfile = () => {
                     <input
                       type="radio"
                       name="gender"
-                      value="female"
+                      value="Female"
                       onChange={handleChange}
                       className="cursor-pointer"
                     />
@@ -140,7 +140,7 @@ const UpdateProfile = () => {
                     <input
                       type="radio"
                       name="gender"
-                      value="other"
+                      value="Other"
                       onChange={handleChange}
                       className="cursor-pointer"
                     />
@@ -150,7 +150,7 @@ const UpdateProfile = () => {
                     <input
                       type="radio"
                       name="gender"
-                      value="pnts"
+                      value="Prefer not to say"
                       onChange={handleChange}
                       className="cursor-pointer"
                     />

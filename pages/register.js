@@ -87,7 +87,7 @@ const Register = () => {
           />
         </div>
         <div className="w-3/5 h-screen bg-gray-200 p-20 flex flex-col justify-between">
-          <h1 className="text-3xl text-black font-bold ">Sukoon</h1>
+          <Link href="/"><h1 className="text-3xl text-black font-bold ">Sukoon</h1></Link>
 
           <div className="w-full flex flex-col max-w-[700px]">
             <div className="w-full flex flex-col mb-2">
