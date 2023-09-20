@@ -35,7 +35,7 @@ const Professionals = () => {
   if (!sessionToken) {
     router.replace("/login");
   } else if (isLoading) {
-    <div>Loading...</div>;
+    return <div>Loading...</div>;
   } else {
     associated_professionals = userData.profile.associated_professionals;
 
