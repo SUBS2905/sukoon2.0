@@ -6,12 +6,10 @@ import { SadIcon } from "@/components/icons";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
 import useUserData from "@/hooks/useUserData";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const Professionals = () => {
-  const sessionToken = useProtectedRoute();
-  const router = useRouter();
+  useProtectedRoute();
   const { userData, isLoading } = useUserData();
   const [professionalsData, setProfessionalsData] = useState([]);
 
@@ -32,11 +30,9 @@ const Professionals = () => {
   }, []);
 
   let associated_professionals;
-  if (!sessionToken) {
-    router.replace("/login");
-  } else if (isLoading) {
+  if (isLoading) {
     return <div>Loading...</div>;
-  } else {
+  } else if (userData) {
     associated_professionals = userData.profile.associated_professionals;
 
     if (professionalsData.length > 0) {
