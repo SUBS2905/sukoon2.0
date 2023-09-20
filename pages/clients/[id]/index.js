@@ -86,7 +86,7 @@ const ClientDetails = () => {
             </div>
             {/* Right half */}
             <div className="w-1/2">
-              <div className="flex flex-col w-3/4 mt-12">
+              <div className="flex flex-col w-3/4">
                 <label className="font-semibold text-sm text-gray-600">
                   Last Name
                 </label>

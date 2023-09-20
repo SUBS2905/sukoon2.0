@@ -1,11 +1,16 @@
-const ProfessionalCard = ({ professional, href }) => {
+const ProfessionalCard = ({ professional, href, isAssociated }) => {
   const { firstname, lastname, experience, speciality } = professional;
+
+  const cardBg = isAssociated ? "bg-green-200" : "bg-white";
 
   return (
     <>
-      <div className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow">
+      <div
+        className={`max-w-sm p-6 ${cardBg} border-gray-200 rounded-lg shadow`}
+      >
         <h5 className="mb-2 text-2xl font-bold tracking-tight text-black cursor-pointer">
-          {firstname} {lastname}
+          {firstname} {lastname} &nbsp;
+        <span className="text-gray-500 font-semibold text-sm">{isAssociated && "(Consulting)"}</span>
         </h5>
         <p className="mb-3 font-semibold text-gray-700 text-justify">
           Experience: {experience} years
