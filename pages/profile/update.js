@@ -1,4 +1,5 @@
 import Layout from "@/components/Layout";
+import Loading from "@/components/Loading";
 import Navbar from "@/components/Navbar";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
 import Head from "next/head";
@@ -8,6 +9,7 @@ import React, { useState } from "react";
 const UpdateProfile = () => {
   const userToken = useProtectedRoute();
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({});
 
   if(!userToken){
@@ -23,6 +25,7 @@ const UpdateProfile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(form);
+    setLoading(true);
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URI}/user/profile`,
@@ -36,12 +39,17 @@ const UpdateProfile = () => {
         }
       );
       const data = await res.json();
-      console.log(data);
+      setLoading(false);
       router.replace("/profile/view");
     } catch (err) {
+      setLoading(false);
       console.log(err);
     }
   };
+
+  if(loading){
+    return <Loading type="bubbles" />
+  }
 
   return (
     <>

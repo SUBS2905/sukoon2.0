@@ -1,5 +1,6 @@
 import Footer from "@/components/Footer";
 import Layout from "@/components/Layout";
+import Loading from "@/components/Loading";
 import Navbar from "@/components/Navbar";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
 import { formatDate } from "@/utils/utils";
@@ -16,6 +17,7 @@ const ProfessionalDetails = () => {
   const [emailSent, setEmailSent] = useState("");
 
   const handleNotify = async () => {
+    setIsLoading(true);
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URI}/professional/${id}/notify`,
@@ -57,7 +59,7 @@ const ProfessionalDetails = () => {
   }, [id]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading type="bubbles" />;
   }
 
   if (!professionalDetails) {

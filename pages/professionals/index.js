@@ -1,5 +1,6 @@
 import Footer from "@/components/Footer";
 import Layout from "@/components/Layout";
+import Loading from "@/components/Loading";
 import Navbar from "@/components/Navbar";
 import ProfessionalCard from "@/components/ProfessionalCard";
 import { SadIcon } from "@/components/icons";
@@ -31,7 +32,7 @@ const Professionals = () => {
 
   let associated_professionals;
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading type="bubbles" />;
   } else if (userData) {
     associated_professionals = userData.profile.associated_professionals;
 

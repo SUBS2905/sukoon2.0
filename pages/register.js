@@ -4,9 +4,11 @@ import RegisterImage from "@/public/assets/signup-art.jpg";
 import Link from "next/link";
 import Head from "next/head";
 import { Switch } from "@mui/material";
+import Loading from "@/components/Loading";
 
 const Register = () => {
   const [form, setForm] = useState({});
+  const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
   const [checked, setChecked] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -30,11 +32,11 @@ const Register = () => {
     setForm((values) => ({ ...values, [name]: value }));
   };
 
-  
   const handleSubmit = useCallback(
     async (e) => {
       e.preventDefault();
       // console.log(form);
+      setLoading(true);
 
       try {
         const res = await fetch(
@@ -46,33 +48,45 @@ const Register = () => {
             },
             body: JSON.stringify(form),
           }
-          );
-          const data = await res.json();
+        );
+        const data = await res.json();
         if (res.status === 201) {
+          setLoading(false);
           setErr(`Verification email sent to ${data.email}`);
         } else if (res.status === 409) {
+          setLoading(false);
           setErr(data.message);
         }
       } catch (error) {
+        setLoading(false);
         console.error(error);
       }
-    }, [form]);
-    
-    const handleKeyDown = useCallback((e) => {
-        if (e.key === "Enter") {
-          e.preventDefault();
-          handleSubmit(e);
-        }
-    },[handleSubmit]);
+    },
+    [form]
+  );
 
-    useEffect(() => {
-      document.addEventListener("keydown", handleKeyDown);
-      return () => {
-        document.removeEventListener("keydown", handleKeyDown);
-      };
-    }, [handleKeyDown]);
-    
-    return (
+  const handleKeyDown = useCallback(
+    (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        handleSubmit(e);
+      }
+    },
+    [handleSubmit]
+  );
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleKeyDown]);
+
+  if (loading) {
+    return <Loading type="bubbles" />;
+  }
+
+  return (
     <>
       <Head>
         <title>Sukoon | Register</title>
@@ -87,7 +101,9 @@ const Register = () => {
           />
         </div>
         <div className="w-3/5 h-screen bg-gray-200 p-20 flex flex-col justify-between">
-          <Link href="/"><h1 className="text-3xl text-black font-bold ">Sukoon</h1></Link>
+          <Link href="/">
+            <h1 className="text-3xl text-black font-bold ">Sukoon</h1>
+          </Link>
 
           <div className="w-full flex flex-col max-w-[700px]">
             <div className="w-full flex flex-col mb-2">

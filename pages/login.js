@@ -5,11 +5,13 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import Head from "next/head";
+import Loading from "@/components/Loading";
 
 const Login = () => {
   const router = useRouter();
   const [form, setForm] = useState({});
   const [err, setErr] = useState("");
+  const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   const handleToggle = () => {
@@ -26,6 +28,7 @@ const Login = () => {
   const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
     // console.log(form);
+    setLoading(true);
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URI}/user/signin`,
@@ -42,13 +45,17 @@ const Login = () => {
         // console.log(data);
         const token = data.user_token;
         Cookies.set("sessionToken", token, { expires: 7, secure: true });
+        setLoading(false);
         router.push("/");
       } else if (res.status === 401) {
+        setLoading(false);
         setErr(data.message);
       } else if (res.status === 404) {
+        setLoading(false);
         setErr(data.message);
       }
     } catch (error) {
+      setLoading(false);
       console.error(error);
     }
   },[form, router])
@@ -67,6 +74,10 @@ const Login = () => {
     };
   }, [handleKeyDown]);
   
+  if(loading){
+    return <Loading type="bubbles" />
+  }
+
   return (
     <>
       <Head>
