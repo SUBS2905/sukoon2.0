@@ -1,3 +1,4 @@
+import Loading from "@/components/Loading";
 import { EnterPassword } from "@/components/icons";
 import Head from "next/head";
 import Link from "next/link";
@@ -9,9 +10,11 @@ const ResetPassword = () => {
   const [msg, setMsg] = useState(null);
   const { resetToken } = router.query;
   const [newPassword, setNewPassword] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleClick = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URI}/user/reset-password`,
@@ -29,15 +32,21 @@ const ResetPassword = () => {
 
       const data = await res.json();
       if (res.ok) {
-        console.log(data);
         setMsg("Password changed successfully");
+        setLoading(false);
       } else {
         setMsg("Invalid or expired token");
+        setLoading(false);
       }
     } catch {
       setMsg("Something went wrong");
+      setLoading(false);
     }
   };
+
+  if (loading) {
+    return <Loading type="bubbles" />;
+  }
 
   return (
     <>
@@ -67,7 +76,12 @@ const ResetPassword = () => {
             </button>
             <p className="text-red-600 font-bold">{msg}</p>
           </div>
-          <Link href="/login" className="text-sm font-semibold text-blue-600 underline underline-offset-4">Go to login page</Link>
+          <Link
+            href="/login"
+            className="text-sm font-semibold text-blue-600 underline underline-offset-4"
+          >
+            Go to login page
+          </Link>
         </div>
       </main>
     </>

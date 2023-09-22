@@ -1,14 +1,16 @@
-import { EnterPassword, Thinking } from "@/components/icons";
+import Loading from "@/components/Loading";
+import { Thinking } from "@/components/icons";
 import Head from "next/head";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState(null);
   const [message, setMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleClick = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URI}/user/forgot-password`,
@@ -22,13 +24,20 @@ const ForgotPassword = () => {
       );
       if (res.ok) {
         setMessage(`Email sent to ${email}.`);
+        setLoading(false);
       } else {
         setMessage("User with this email doesn't exist");
+        setLoading(false);
       }
     } catch (err) {
       setMessage("Something went wrong");
+      setLoading(false);
     }
   };
+
+  if (loading) {
+    return <Loading type="bubbles" />;
+  }
 
   return (
     <>
