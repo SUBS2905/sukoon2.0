@@ -7,10 +7,12 @@ import { SadIcon } from "@/components/icons";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
 import useUserData from "@/hooks/useUserData";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const Professionals = () => {
   useProtectedRoute();
+  const router = useRouter();
   const { userData, isLoading } = useUserData();
   const [loading, setLoading] = useState(false);
   const [professionalsData, setProfessionalsData] = useState([]);
@@ -37,7 +39,7 @@ const Professionals = () => {
   let associated_professionals;
   if (isLoading || loading) {
     return <Loading type="bubbles" />;
-  } else if (userData) {
+  } else if (userData && userData.profile) {
     associated_professionals = userData.profile.associated_professionals;
 
     if (professionalsData.length > 0) {
@@ -86,6 +88,8 @@ const Professionals = () => {
         </>
       );
     }
+  } else {
+    router.replace("/profile/view");
   }
 };
 

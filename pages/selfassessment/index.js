@@ -1,11 +1,23 @@
 import Footer from "@/components/Footer";
 import Layout from "@/components/Layout";
+import Loading from "@/components/Loading";
 import Navbar from "@/components/Navbar";
 import TestCard from "@/components/TestCard";
+import useUserData from "@/hooks/useUserData";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import React from "react";
 
 const SelfAssessmentTests = () => {
+  const router = useRouter();
+  const {userData, isLoading} = useUserData();
+
+  if(isLoading){
+    return <Loading type="bubbles" />
+  }
+  if(!userData.profile){
+    router.replace("/profile/view");
+  }
   return (
     <>
       <Head>
