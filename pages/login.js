@@ -14,68 +14,79 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
+  const sessionToken = Cookies.get("sessionToken");
+
   const handleToggle = () => {
     setShowPassword(!showPassword);
   };
 
-  
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setForm((values) => ({ ...values, [name]: value }));
   };
 
-  const handleSubmit = useCallback(async (e) => {
-    e.preventDefault();
-    // console.log(form);
-    setLoading(true);
-    try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_URI}/user/signin`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(form),
+  const handleSubmit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      // console.log(form);
+      setLoading(true);
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_SERVER_URI}/user/signin`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(form),
+          }
+        );
+        const data = await res.json();
+        if (res.status === 200) {
+          // console.log(data);
+          const token = data.user_token;
+          Cookies.set("sessionToken", token, { expires: 7, secure: true });
+          router.push("/");
+          setLoading(false);
+        } else if (res.status === 401) {
+          setLoading(false);
+          setErr(data.message);
+        } else if (res.status === 404) {
+          setLoading(false);
+          setErr(data.message);
         }
-      );
-      const data = await res.json();
-      if (res.status === 200) {
-        // console.log(data);
-        const token = data.user_token;
-        Cookies.set("sessionToken", token, { expires: 7, secure: true });
-        router.push("/");
+      } catch (error) {
         setLoading(false);
-      } else if (res.status === 401) {
-        setLoading(false);
-        setErr(data.message);
-      } else if (res.status === 404) {
-        setLoading(false);
-        setErr(data.message);
+        console.error(error);
       }
-    } catch (error) {
-      setLoading(false);
-      console.error(error);
-    }
-  },[form, router])
-  
-  const handleKeyDown = useCallback((e) => {
+    },
+    [form, router]
+  );
+
+  const handleKeyDown = useCallback(
+    (e) => {
       if (e.key === "Enter") {
         e.preventDefault();
         handleSubmit(e);
       }
-    },[handleSubmit]);
-    
+    },
+    [handleSubmit]
+  );
+
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [handleKeyDown]);
-  
-  if(loading){
-    return <Loading type="bubbles" />
+
+  if (sessionToken) {
+    router.replace("/");
+  }
+
+  if (loading) {
+    return <Loading type="bubbles" />;
   }
 
   return (
@@ -93,7 +104,9 @@ const Login = () => {
           />
         </div>
         <div className="w-3/5 h-screen bg-gray-200 p-20 flex flex-col justify-between">
-          <Link href="/"><h1 className="text-3xl text-black font-bold ">Sukoon</h1></Link>
+          <Link href="/">
+            <h1 className="text-3xl text-black font-bold ">Sukoon</h1>
+          </Link>
 
           <div className="w-full flex flex-col max-w-[700px]">
             <div className="w-full flex flex-col mb-2">
