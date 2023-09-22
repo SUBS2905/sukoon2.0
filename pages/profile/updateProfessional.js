@@ -37,7 +37,7 @@ const UpdateProfile = () => {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URI}/user/professional`,
         {
-          method: "POST",
+          method: "PATCH",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${userToken}`,

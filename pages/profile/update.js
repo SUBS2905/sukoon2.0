@@ -30,7 +30,7 @@ const UpdateProfile = () => {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URI}/user/profile`,
         {
-          method: "POST",
+          method: "PATCH",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${userToken}`,
@@ -38,7 +38,9 @@ const UpdateProfile = () => {
           body: JSON.stringify(form),
         }
       );
+      console.log(form);
       const data = await res.json();
+      console.log(data);
       setLoading(false);
       router.replace("/profile/view");
     } catch (err) {
