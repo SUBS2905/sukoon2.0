@@ -70,7 +70,7 @@ const UpdateProfile = () => {
               </h3>
               <div className="flex flex-col w-3/4 mt-8">
                 <label className="font-semibold text-sm text-gray-600">
-                  First Name
+                  First Name <span className="text-red-700">*</span>
                 </label>
                 <input
                   type="text"
@@ -79,7 +79,7 @@ const UpdateProfile = () => {
                   className="bg-transparent py-2 mb-8 border-b-2 border-gray-400 font-semibold focus-within:border-black transition-colors duration-500 outline-none"
                 />
                 <label className="font-semibold text-sm text-gray-600">
-                  Contact Number
+                  Contact Number <span className="text-red-700">*</span>
                 </label>
                 <input
                   type="number"
@@ -88,7 +88,7 @@ const UpdateProfile = () => {
                   className="bg-transparent py-2 mb-8 border-b-2 border-gray-400 font-semibold focus-within:border-black transition-colors duration-500 outline-none"
                 />
                 <label className="font-semibold text-sm text-gray-600">
-                  Date of Birth
+                  Date of Birth <span className="text-red-700">*</span>
                 </label>
                 <input
                   type="date"
@@ -102,7 +102,7 @@ const UpdateProfile = () => {
             <div className="w-1/2">
               <div className="flex flex-col w-3/4 mt-20">
                 <label className="font-semibold text-sm text-gray-600">
-                  Last Name
+                  Last Name <span className="text-red-700">*</span>
                 </label>
                 <input
                   type="text"
@@ -121,7 +121,7 @@ const UpdateProfile = () => {
                   className="bg-transparent py-2 mb-8 border-b-2 border-gray-400 font-semibold focus-within:border-black transition-colors duration-500 outline-none"
                 />
                 <label className="font-semibold text-sm text-gray-600 mb-4">
-                  Gender
+                  Gender <span className="text-red-700">*</span>
                 </label>
                 <div className="flex justify-between">
                   <div className="flex justify-around">

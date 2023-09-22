@@ -2,6 +2,7 @@
 import ClientCard from "@/components/ClientCard";
 import Footer from "@/components/Footer";
 import Layout from "@/components/Layout";
+import Loading from "@/components/Loading";
 import Navbar from "@/components/Navbar";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
 import Head from "next/head";
@@ -11,10 +12,12 @@ const Clients = () => {
   const userToken = useProtectedRoute();
   const [associatedClients, setAssociatedClients] = useState([]);
   const [clientInfo, setClientInfo] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getAssociatedClients = async () => {
       try {
+        setLoading(true);
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_SERVER_URI}/client/associatedClients`,
           {
@@ -28,7 +31,9 @@ const Clients = () => {
 
         const data = await res.json();
         setAssociatedClients(data);
+        setLoading(false);
       } catch (err) {
+        setLoading(false);
         console.log(err);
       }
     };
@@ -51,19 +56,25 @@ const Clients = () => {
 
     // Fetch details for each associated client
     const fetchClientDetails = async () => {
+      setLoading(true);
       const details = await Promise.all(
         associatedClients.map(async (clientId) => {
           return await getClientDetails(clientId);
         })
       );
-      console.log(details);
       setClientInfo(details);
+      setLoading(false);
     };
 
     if (associatedClients.length > 0) {
       fetchClientDetails();
     }
   }, [associatedClients]);
+
+
+  if(loading){
+    return <Loading type="bubbles" />
+  }
 
   return (
     <>

@@ -1,4 +1,5 @@
 import Layout from "@/components/Layout";
+import Loading from "@/components/Loading";
 import Navbar from "@/components/Navbar";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
 import Head from "next/head";
@@ -8,6 +9,7 @@ import React, { useState } from "react";
 const UpdateProfile = () => {
   const userToken = useProtectedRoute();
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     speciality: [],
   });
@@ -30,6 +32,7 @@ const UpdateProfile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(form);
+    setLoading(true);
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URI}/user/professional`,
@@ -44,11 +47,17 @@ const UpdateProfile = () => {
       );
       const data = await res.json();
       console.log(data);
+      setLoading(false);
       router.replace("/profile/viewProfessional");
     } catch (err) {
+      setLoading(false);
       console.log(err);
     }
   };
+
+  if (loading) {
+    return <Loading type="bubbles" />;
+  }
 
   return (
     <>
@@ -69,7 +78,7 @@ const UpdateProfile = () => {
               </h3>
               <div className="flex flex-col w-3/4 mt-8">
                 <label className="font-semibold text-sm text-gray-600">
-                  First Name
+                  First Name <span className="text-red-700">*</span>
                 </label>
                 <input
                   type="text"
@@ -78,7 +87,7 @@ const UpdateProfile = () => {
                   className="bg-transparent py-2 mb-8 border-b-2 border-gray-400 font-semibold focus-within:border-black transition-colors duration-500 outline-none"
                 />
                 <label className="font-semibold text-sm text-gray-600">
-                  Contact Number
+                  Contact Number <span className="text-red-700">*</span>
                 </label>
                 <input
                   type="number"
@@ -88,7 +97,7 @@ const UpdateProfile = () => {
                 />
 
                 <label className="font-semibold text-sm text-gray-600">
-                  License Number
+                  License Number <span className="text-red-700">*</span>
                 </label>
                 <input
                   type="text"
@@ -97,7 +106,7 @@ const UpdateProfile = () => {
                   className="bg-transparent py-2 mb-8 border-b-2 border-gray-400 font-semibold focus-within:border-black transition-colors duration-500 outline-none"
                 />
                 <label className="font-semibold text-sm text-gray-600">
-                  Date of Birth
+                  Date of Birth <span className="text-red-700">*</span>
                 </label>
                 <input
                   type="date"
@@ -108,7 +117,7 @@ const UpdateProfile = () => {
 
                 {/* Speciality code goes here */}
                 <label className="font-semibold text-sm text-gray-600">
-                  Speciality (Comma-separated)
+                  Speciality (Comma-separated) <span className="text-red-700">*</span>
                 </label>
                 <input
                   type="text"
@@ -123,7 +132,7 @@ const UpdateProfile = () => {
             <div className="w-1/2">
               <div className="flex flex-col w-3/4 mb-4">
                 <label className="font-semibold text-sm text-gray-600">
-                  Last Name
+                  Last Name <span className="text-red-700">*</span>
                 </label>
                 <input
                   type="text"
@@ -132,7 +141,7 @@ const UpdateProfile = () => {
                   className="bg-transparent py-2 mb-8 border-b-2 border-gray-400 font-semibold focus-within:border-black transition-colors duration-500 outline-none"
                 />
                 <label className="font-semibold text-sm text-gray-600">
-                  Experience (in years)
+                  Experience (in years) <span className="text-red-700">*</span>
                 </label>
                 <input
                   type="number"
@@ -142,7 +151,7 @@ const UpdateProfile = () => {
                 />
 
                 <label className="font-semibold text-sm text-gray-600">
-                  Licensing Authority
+                  Licensing Authority <span className="text-red-700">*</span>
                 </label>
                 <input
                   type="text"
@@ -152,7 +161,7 @@ const UpdateProfile = () => {
                 />
 
                 <label className="font-semibold text-sm text-gray-600 mb-4">
-                  Gender
+                  Gender <span className="text-red-700">*</span>
                 </label>
                 <div className="flex justify-between">
                   <div className="flex justify-around">

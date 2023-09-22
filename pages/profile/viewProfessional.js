@@ -1,4 +1,5 @@
 import Layout from "@/components/Layout";
+import Loading from "@/components/Loading";
 import Navbar from "@/components/Navbar";
 import { SadIcon } from "@/components/icons";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
@@ -21,7 +22,7 @@ const ViewProfile = () => {
   }
 
   if (isLoading) {
-    return <div>Please Wait...</div>;
+    return <Loading type="bubbles" />;
   }
   // console.log(userData);
   if (userData?.professional) {

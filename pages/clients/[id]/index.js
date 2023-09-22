@@ -1,5 +1,6 @@
 import Footer from "@/components/Footer";
 import Layout from "@/components/Layout";
+import Loading from "@/components/Loading";
 import Navbar from "@/components/Navbar";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
 import { formatDate } from "@/utils/utils";
@@ -12,7 +13,7 @@ const ClientDetails = () => {
   const router = useRouter();
   const { id } = router.query;
   const [clientDetails, setClientDetails] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setLoading] = useState(true);
 
   const handleResults = () =>{
     router.push(`/clients/${id}/selfAssessmentResults`);
@@ -27,18 +28,18 @@ const ClientDetails = () => {
           );
           const data = await res.json();
           setClientDetails(data.profile);
-          setIsLoading(false);
+          setLoading(false);
         }
       } catch (err) {
         console.log(err);
-        setIsLoading(false);
+        setLoading(false);
       }
     };
     fetchDetails();
   }, [id]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading type="bubbles" />;
   }
 
   if (!clientDetails) {

@@ -45,8 +45,8 @@ const Login = () => {
         // console.log(data);
         const token = data.user_token;
         Cookies.set("sessionToken", token, { expires: 7, secure: true });
-        setLoading(false);
         router.push("/");
+        setLoading(false);
       } else if (res.status === 401) {
         setLoading(false);
         setErr(data.message);

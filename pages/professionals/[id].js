@@ -13,11 +13,11 @@ const ProfessionalDetails = () => {
   const router = useRouter();
   const { id } = router.query;
   const [professionalDetails, setProfessionalDetails] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setLoading] = useState(true);
   const [emailSent, setEmailSent] = useState("");
 
   const handleNotify = async () => {
-    setIsLoading(true);
+    setLoading(true);
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URI}/professional/${id}/notify`,
@@ -30,17 +30,18 @@ const ProfessionalDetails = () => {
         }
       );
       if (res.status === 200) {
-        setIsLoading(false);
+        setLoading(false);
         setEmailSent("Professional notified!");
       }
     } catch (err) {
       console.log(err);
-      setIsLoading(false);
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     const fetchDetails = async () => {
+      setLoading(true);
       try {
         if (id) {
           const res = await fetch(
@@ -48,11 +49,11 @@ const ProfessionalDetails = () => {
           );
           const data = await res.json();
           setProfessionalDetails(data.professional);
-          setIsLoading(false);
+          setLoading(false);
         }
       } catch (err) {
         console.log(err);
-        setIsLoading(false);
+        setLoading(false);
       }
     };
     fetchDetails();

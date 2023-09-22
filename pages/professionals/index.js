@@ -12,17 +12,21 @@ import { useEffect, useState } from "react";
 const Professionals = () => {
   useProtectedRoute();
   const { userData, isLoading } = useUserData();
+  const [loading, setLoading] = useState(false);
   const [professionalsData, setProfessionalsData] = useState([]);
 
   useEffect(() => {
     const fetchProfessionals = async () => {
+      setLoading(true);
       try {
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_SERVER_URI}/professional/all`
         );
         const data = await res.json();
         setProfessionalsData(data);
+        setLoading(false);
       } catch (err) {
+        setLoading(false);
         console.error(err);
       }
     };
@@ -31,7 +35,7 @@ const Professionals = () => {
   }, []);
 
   let associated_professionals;
-  if (isLoading) {
+  if (isLoading || loading) {
     return <Loading type="bubbles" />;
   } else if (userData) {
     associated_professionals = userData.profile.associated_professionals;

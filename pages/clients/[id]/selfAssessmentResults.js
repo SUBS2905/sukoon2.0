@@ -1,5 +1,6 @@
 import Footer from "@/components/Footer";
 import Layout from "@/components/Layout";
+import Loading from "@/components/Loading";
 import Navbar from "@/components/Navbar";
 import TestResultCard from "@/components/TestResultCard";
 import { SadIcon } from "@/components/icons";
@@ -39,7 +40,7 @@ const SelfAssessmentResults = () => {
   },[id, userToken])
 
   if(loading){
-    return<div>Loading...</div>
+    return <Loading type="bubbles" />
   }
 
   if(clientTestData.length > 0){
