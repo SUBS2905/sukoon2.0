@@ -15,9 +15,12 @@ const SelfAssessmentTests = () => {
   if(isLoading){
     return <Loading type="bubbles" />
   }
-  if(!userData.profile){
+  if(!userData){
+    router.replace("/login");
+  }else if(!userData.profile){
     router.replace("/profile/view");
   }
+  
   return (
     <>
       <Head>
