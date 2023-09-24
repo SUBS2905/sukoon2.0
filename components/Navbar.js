@@ -1,8 +1,9 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import useUserData from "@/hooks/useUserData";
 import useSignout from "@/hooks/useSignout";
+import Loading from "./Loading";
 
 const CustomLink = ({ href, title, className = "" }) => {
   const router = useRouter();
@@ -28,21 +29,25 @@ const Navbar = () => {
   const { userData } = useUserData();
   const signout = useSignout();
   const [isDropdown, setDropdown] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const toggleDropdown = () => {
     setDropdown(!isDropdown);
   };
 
   const handleProfile = () => {
-    if(userData?.isProfessional)
-      router.push("/profile/viewProfessional");
-    else
-      router.push("/profile/view");
-
+    setLoading(true);
+    if (userData?.isProfessional) router.push("/profile/viewProfessional");
+    else router.push("/profile/view");
   };
+
+  useEffect(() => {
+    setLoading(false);
+  }, [userData]);
 
   return (
     <header className="w-full bg-gray-200 px-32 py-8 font-medium flex items-center justify-between">
+      {loading && <Loading type="bubbles" />}
       <div className="left-[50%]">
         <Link href="/">
           <h1 className="text-2xl font-bold">Sukoon</h1>
@@ -64,12 +69,8 @@ const Navbar = () => {
             className="mx-4"
           />
         )}
-        {(userData?.isProfessional === true) && (
-          <CustomLink
-            href="/clients"
-            title="Clients"
-            className="mx-4"
-          />
+        {userData?.isProfessional === true && (
+          <CustomLink href="/clients" title="Clients" className="mx-4" />
         )}
         <button
           className="ml-4 text-white text-lg bg-blue-600 p-2 px-4 rounded"
