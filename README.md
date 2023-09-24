@@ -1,38 +1,20 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Sukoon: Empowering Adolescents' Mental Health
+
+Sukoon is a platform dedicated to addressing the increasing mental health challenges faced by adolescents. It provides a safe and comfortable space for clients to seek help from the convenience of their homes. Sukoon offers a range of features to enhance the mental health journey:
+
+- **Self-Screening:** Get started with a personalized self-assessment to understand your mental health needs.
+
+- **Connect with Professionals:** Schedule sessions with qualified mental health professionals at your preferred time, ensuring comfort and convenience.
+
+- **For Professionals: Support the noble cause:** Sukoon also offers a dedicated platform for mental health professionals to connect with and support their clients.
 
 ## Getting Started
+1. Go to [Sukoon portal](https://sukoon-web.vercel.app/).
+2. Create a new account as a client or a professional.
+3. Begin your mental health journey with our self-screening features or help the clients waiting for your support.
 
-First, run the development server:
+### Contributing 
+I welcome contributions from the community! If you'd like to contribute to Sukoon in any way feel free to do so.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Contact
+For any questions, feedback, or support, feel free to reach out to me at [subhransumajhi.sedsnebula@gmail.com](mailto:subhransumajhi.sedsnebula@gmail.com).
