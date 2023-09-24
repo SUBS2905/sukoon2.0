@@ -26,28 +26,25 @@ const CustomLink = ({ href, title, className = "" }) => {
 
 const Navbar = () => {
   const router = useRouter();
-  const { userData } = useUserData();
+  const { userData, isLoading } = useUserData();
   const signout = useSignout();
   const [isDropdown, setDropdown] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   const toggleDropdown = () => {
     setDropdown(!isDropdown);
   };
 
   const handleProfile = () => {
-    setLoading(true);
     if (userData?.isProfessional) router.push("/profile/viewProfessional");
     else router.push("/profile/view");
   };
 
-  useEffect(() => {
-    setLoading(false);
-  }, [userData]);
+  if(isLoading){
+    return <Loading type="bubbles" />
+  }
 
   return (
     <header className="w-full bg-gray-200 px-32 py-8 font-medium flex items-center justify-between">
-      {loading && <Loading type="bubbles" />}
       <div className="left-[50%]">
         <Link href="/">
           <h1 className="text-2xl font-bold">Sukoon</h1>
