@@ -92,7 +92,7 @@ const Register = () => {
         <title>Sukoon | Register</title>
       </Head>
       <div className="w-full min-h-screen flex items-start">
-        <div className="relative w-2/5 h-screen flex flex-col">
+        <div className="relative w-2/5 h-screen hidden flex-col lg:flex">
           <Image
             className="w-full h-full object-cover"
             src={RegisterImage}
@@ -100,9 +100,9 @@ const Register = () => {
             priority
           />
         </div>
-        <div className="w-3/5 h-screen bg-gray-200 p-20 flex flex-col justify-between">
+        <div className="w-full h-screen bg-gray-200 p-8 flex flex-col justify-between lg:w-3/5 lg:p-20">
           <Link href="/">
-            <h1 className="text-3xl text-black font-bold ">Sukoon</h1>
+            <h1 className="text-2xl text-black font-bold ">Sukoon</h1>
           </Link>
 
           <div className="w-full flex flex-col max-w-[700px]">
@@ -145,9 +145,9 @@ const Register = () => {
                   onChange={handleToggle}
                 />
               </label>
-              <div className="flex items-center">
-                <Switch checked={checked} onChange={handleSwitch} />
+              <div className="flex items-center text-right">
                 <label className="font-semibold text-sm">
+                  <Switch checked={checked} onChange={handleSwitch} />
                   Mental Health Professional
                 </label>
               </div>
@@ -170,7 +170,7 @@ const Register = () => {
             <div className="w-full flex items-center justify-center relative">
               <div className="w-full h-[1.5px] bg-gray-400 my-4"></div>
             </div>
-            <div className="w-full flex flex-col items-center justify-center my-2 px-28 gap-2">
+            <div className="w-full flex flex-col items-center justify-center text-center my-2 gap-2 lg:px-28">
               <p className="font-semibold">
                 &ldquo;There is hope, even when your brain tells you there
                 isn&apos;t&rdquo;

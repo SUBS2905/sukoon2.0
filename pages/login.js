@@ -95,7 +95,7 @@ const Login = () => {
         <title>Sukoon | Login</title>
       </Head>
       <div className="w-full min-h-screen flex items-start">
-        <div className="relative w-2/5 h-screen flex flex-col">
+        <div className="relative w-2/5 h-screen hidden flex-col lg:flex">
           <Image
             className="w-full h-full object-cover"
             src={LoginImage}
@@ -103,9 +103,9 @@ const Login = () => {
             priority
           />
         </div>
-        <div className="w-3/5 h-screen bg-gray-200 p-20 flex flex-col justify-between">
+        <div className="w-full h-screen bg-gray-200 p-8 flex flex-col justify-between lg:w-3/5 lg:p-20">
           <Link href="/">
-            <h1 className="text-3xl text-black font-bold ">Sukoon</h1>
+            <h1 className="text-2xl text-black font-bold ">Sukoon</h1>
           </Link>
 
           <div className="w-full flex flex-col max-w-[700px]">
@@ -166,8 +166,8 @@ const Login = () => {
             <div className="w-full flex items-center justify-center relative">
               <div className="w-full h-[1.5px] bg-gray-400 my-4"></div>
             </div>
-            <div className="w-full flex flex-col items-center justify-center my-2 px-36 gap-4">
-              <p className="font-semibold">
+            <div className="w-full flex flex-col items-center justify-center my-2 px-2 gap-4 lg:px-36">
+              <p className="font-semibold text-center">
                 &ldquo;Mental Health... is not a destination but a
                 process&rdquo;
               </p>
