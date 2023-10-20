@@ -59,10 +59,10 @@ const ForgotPassword = () => {
               name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-1/6 text-center bg-transparent border-gray-400 border-b-2 focus-within:border-black outline-none px-2 py-1"
+              className="text-center bg-transparent border-gray-400 border-b-2 focus-within:border-black outline-none px-2 py-1 lg:w-1/6"
             />
             <button
-              className="w-1/6 bg-black font-semibold text-white py-2 px-16 rounded-md mt-4"
+              className="bg-black font-semibold text-white py-2 px-16 rounded-md mt-4 lg:w-1/6"
               onClick={handleClick}
             >
               Get Reset Link
