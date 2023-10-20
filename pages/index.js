@@ -16,7 +16,7 @@ export default function Home() {
       </Head>
       <main className="flex flex-col w-full min-h-screen">
         <Navbar />
-        <Layout className="pt-8">
+        <Layout className="p-12 lg:p-32 lg:pt-8">
           <SectionLeftImage
             title="Breaking Barriers"
             subtitle="Your Bridge to Confidential Online Mental Health Support"
@@ -33,7 +33,7 @@ export default function Home() {
             image={HappyMan}
           />
         </Layout>
-        <LayoutDark className="pt-32 text-white">
+        <LayoutDark className="p-12 text-white lg:p-32">
           <SectionRightImage
             title="Courage to Heal"
             subtitle="Find Solace and Support on Our Digital Platform"
