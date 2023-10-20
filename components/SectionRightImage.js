@@ -3,23 +3,23 @@ import React from "react";
 
 const SectionRightImage = ({title, subtitle, text1, text2, image, className=""}) => {
   return (
-    <div className={`flex items-center justify-between w-full ${className}`}>
-      <div className="w-1/2 flex flex-col items-center self-center">
-        <h1 className="inline-block w-full text-dark font-bold text-6xl">
+    <div className={`flex flex-col lg:flex-row items-center justify-between w-full ${className}`}>
+      <div className="flex flex-col items-center self-center lg:w-1/2">
+        <h1 className="inline-block w-full text-dark font-bold text-4xl text-center lg:text-6xl lg:text-left">
           {title}
         </h1>
-        <h3 className="inline-block w-full pt-2 font-semibold text-gray-300 text-xl">
+        <h3 className="inline-block w-full pt-2 font-semibold text-gray-300 text-center text-lg lg:text-xl lg:text-left">
           {subtitle}
         </h3>
-        <p className="my-4 text-base font-medium">
+        <p className="my-4 text-base font-medium text-center lg:text-left">
           {text1}
         </p>
-        <p className="my-4 text-base font-medium">
+        <p className="my-4 text-base font-medium text-center lg:text-left">
           {text2}
         </p>
         <div className="flex items-center self-start mt-2"></div>
       </div>
-      <div className="w-1/2 flex justify-end">
+      <div className="flex justify-center lg:justify-end lg:w-1/2">
         <Image src={image} alt="" className="w-3/4 h-auto rounded-lg" />
       </div>
     </div>

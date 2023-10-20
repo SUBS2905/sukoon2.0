@@ -1,11 +1,15 @@
 import Layout from "./Layout";
 import Link from "next/link";
 
-const Footer = ({className}) => {
+const Footer = ({ className }) => {
   return (
     <footer className="w-full border-t-2 border-solid border-dark font-medium text-lg mt-auto">
-      <Layout className={`py-8 flex items-center justify-between ${className}`}>
-        <span>{new Date().getFullYear()} &copy; All Rights Reserved.</span>
+      <Layout
+        className={`py-8 flex flex-col lg:flex-row items-center justify-between ${className}`}
+      >
+        <span className="mb-4 lg:mb-0 lg:mr-4">
+          {new Date().getFullYear()} &copy; All Rights Reserved.
+        </span>
         <div className="flex items-center">
           Built with
           <span className="text-red-600 text-2xl px-1">&hearts;</span>{" "}
