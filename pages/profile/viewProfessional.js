@@ -135,7 +135,7 @@ const ViewProfile = () => {
           <div className="w-full flex justify-center p-8">
             <SadIcon />
           </div>
-          <div className="w-full flex flex-col items-center justify-center">
+          <div className="w-full flex flex-col items-center justify-center text-center">
             <h1 className="text-2xl font-bold my-4">
               It&apos;s quite empty in here!
             </h1>

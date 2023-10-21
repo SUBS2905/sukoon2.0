@@ -64,19 +64,19 @@ const UpdateProfile = () => {
       <Head>
         <title>Sukoon | Update Profile</title>
       </Head>
-      <main className="flex flex-col w-full h-screen">
+      <main className="flex flex-col w-full h-max lg:h-screen">
         <Navbar />
-        <Layout className="pt-8">
-          <div className="flex justify-between items-center w-full">
+        <Layout className="p-8 lg:px-32">
+          <div className="flex flex-col items-center w-full lg:flex-row">
             {/* Left Half */}
-            <div className="w-1/2 flex flex-col">
-              <h1 className="inline-block w-full text-dark font-bold text-4xl">
+            <div className="w-full flex flex-col lg:w-1/2">
+              <h1 className="inline-block w-full font-bold text-center text-4xl lg:text-left">
                 Profile
               </h1>
-              <h3 className="inline-block w-full py-2 font-semibold text-gray-700 text-lg">
+              <h3 className="inline-block w-full py-2 font-semibold text-gray-700 text-center text-lg lg:text-left">
                 Update your profile
               </h3>
-              <div className="flex flex-col w-3/4 mt-8">
+              <div className="flex flex-col mt-8 lg:w-3/4">
                 <label className="font-semibold text-sm text-gray-600">
                   First Name <span className="text-red-700">*</span>
                 </label>
@@ -129,8 +129,8 @@ const UpdateProfile = () => {
               </div>
             </div>
             {/* Right half */}
-            <div className="w-1/2">
-              <div className="flex flex-col w-3/4 mb-4">
+            <div className="lg:w-1/2">
+              <div className="flex flex-col mb-4 lg:w-3/4">
                 <label className="font-semibold text-sm text-gray-600">
                   Last Name <span className="text-red-700">*</span>
                 </label>
@@ -164,7 +164,7 @@ const UpdateProfile = () => {
                   Gender <span className="text-red-700">*</span>
                 </label>
                 <div className="flex justify-between">
-                  <div className="flex justify-around">
+                  <div className="flex items-center justify-around">
                     <input
                       type="radio"
                       name="gender"
@@ -174,7 +174,7 @@ const UpdateProfile = () => {
                     />
                     <label className="font-semibold text-sm mx-2">Male</label>
                   </div>
-                  <div className="flex justify-around">
+                  <div className="flex items-center justify-around">
                     <input
                       type="radio"
                       name="gender"
@@ -184,7 +184,7 @@ const UpdateProfile = () => {
                     />
                     <label className="font-semibold text-sm mx-2">Female</label>
                   </div>
-                  <div className="flex justify-around">
+                  <div className="flex items-center justify-around">
                     <input
                       type="radio"
                       name="gender"
@@ -194,7 +194,7 @@ const UpdateProfile = () => {
                     />
                     <label className="font-semibold text-sm mx-2">Other</label>
                   </div>
-                  <div className="flex justify-around">
+                  <div className="flex items-center justify-around">
                     <input
                       type="radio"
                       name="gender"
