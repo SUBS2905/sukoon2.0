@@ -32,16 +32,16 @@ const ViewProfile = () => {
         <Head>
           <title>Sukoon | View Profile</title>
         </Head>
-        <main className="flex flex-col w-full h-screen">
+        <main className="flex flex-col w-full h-max lg:h-screen">
           <Navbar />
-          <Layout className="pt-8">
-            <div className="flex justify-between items-center w-full">
+          <Layout className="p-8 lg:px-32">
+            <div className="flex flex-col items-center w-full lg:flex-row">
               {/* Left Half */}
-              <div className="w-1/2 flex flex-col">
-                <h1 className="inline-block w-full text-dark font-bold text-4xl">
+              <div className="w-full flex flex-col lg:w-1/2">
+                <h1 className="inline-block w-full font-bold text-4xl text-center lg:text-left">
                   Profile
                 </h1>
-                <div className="flex flex-col w-3/4 mt-8">
+                <div className="flex flex-col text-center mt-8 lg:w-3/4 lg:text-left">
                   <label className="font-semibold text-sm text-gray-600">
                     First Name
                   </label>
@@ -81,8 +81,8 @@ const ViewProfile = () => {
                 </div>
               </div>
               {/* Right half */}
-              <div className="w-1/2">
-                <div className="flex flex-col w-3/4 mt-12">
+              <div className="w-full pt-8 text-center lg:w-1/2 lg:mt-0 lg:text-left">
+                <div className="flex flex-col w-full lg:w-3/4 lg:mt-12">
                   <label className="font-semibold text-sm text-gray-600">
                     Last Name
                   </label>

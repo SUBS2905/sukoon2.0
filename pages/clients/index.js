@@ -83,7 +83,7 @@ const Clients = () => {
       </Head>
       <main className="flex flex-col w-full min-h-screen bg-gray-200">
         <Navbar />
-        <Layout className="pt-8">
+        <Layout className="p-8 lg:px-32">
           {clientInfo.map((client, index) => (
             <ClientCard
               key={index}

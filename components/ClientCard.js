@@ -3,8 +3,8 @@ const ClientCard = ({ client, href }) => {
 
   return (
     <>
-      <div className="w-full bg-white flex justify-between items-center p-6 my-4 rounded-md shadow-md">
-        <div className="w-2/3 flex">
+      <div className="w-full bg-white flex flex-col gap-2 justify-between items-center p-6 my-4 rounded-md shadow-md lg:flex-row lg:gap-0">
+        <div className="flex lg:w-2/3">
           <label className="font-bold text-justify">{firstname} {lastname}</label>
         </div>
         <a

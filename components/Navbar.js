@@ -170,8 +170,8 @@ const Navbar = () => {
               {userData ? "Account" : "Get Started"}
             </button>
             {isDropdown && userData && (
-              <div className="absolute right-[127px] z-10 flex justify-end">
-                <div className="w-[100px] mt-2 bg-white rounded shadow">
+              <div className="absolute bottom-4 z-20 flex justify-end">
+                <div className="w-[100px] mt-2 bg-white text-black rounded shadow">
                   <p className="w-full p-1 pt-2 text-center font-bold rounded">
                     {userData.username}
                   </p>
