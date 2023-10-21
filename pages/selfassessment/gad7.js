@@ -76,7 +76,7 @@ const GAD7 = () => {
       </Head>
       <main className="flex flex-col w-full min-h-screen bg-gray-200">
         <Navbar />
-        <Layout className="pt-8 flex flex-col justify-between">
+        <Layout className="p-8 flex flex-col justify-between lg:px-32">
           <div className="w-full flex flex-col gap-8 mb-4">
             <h1 className="text-3xl font-bold">
               Generalised Anxiety Disorder Assessment
@@ -102,7 +102,7 @@ const GAD7 = () => {
               onOptionChange={(value) => handleOptionChange(index, value)}
             />
           ))}
-          <div className="w-full mt-4 bg-white flex items-center justify-between p-8 rounded-md shadow-md">
+          <div className="w-full mt-4 bg-white flex flex-col gap-4 items-center justify-between p-8 rounded-md shadow-md lg:flex-row lg:gap-0">
             <h3 className="font-semibold ">
               Total Score:&nbsp;
               <span className="font-bold bg-gray-200 px-4 py-0.5 rounded">
@@ -115,7 +115,7 @@ const GAD7 = () => {
                 Further evaluation required
               </h2>
             )}
-            <h1 className="bg-gray-200 w-1/4 text-center font-bold px-8 py-1 rounded ">
+            <h1 className="bg-gray-200 text-center font-bold px-8 py-1 rounded lg:w-1/4">
               {result}
             </h1>
           </div>

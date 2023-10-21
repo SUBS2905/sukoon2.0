@@ -3,7 +3,7 @@ const DynamicSelect = ({ options, value, onChange }) => {
     <select
       value={value}
       onChange={onChange}
-      className="w-1/5 bg-gray-200 font-semibold py-1 px-4 rounded outline-none"
+      className="bg-gray-200 font-semibold py-1 px-4 rounded outline-none lg:w-1/5"
     >
       {options.map((option) => (
         <option key={option.value} value={option.value}>
