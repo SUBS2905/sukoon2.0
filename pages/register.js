@@ -5,6 +5,7 @@ import Link from "next/link";
 import Head from "next/head";
 import { Switch } from "@mui/material";
 import Loading from "@/components/Loading";
+import { validateEmail, validatePassword, validateUsername } from "@/utils/validation";
 
 const Register = () => {
   const [form, setForm] = useState({});
@@ -37,6 +38,25 @@ const Register = () => {
       e.preventDefault();
       // console.log(form);
       setLoading(true);
+
+      //Form Validation
+      const usernameError = validateUsername(form.username);
+      const emailError = validateEmail(form.email);
+      const passwordError = validatePassword(form.password);
+
+      if(usernameError){
+        setErr(usernameError.errorMessage);
+        setLoading(false);
+        return ;
+      }else if(emailError){
+        setErr(emailError.errorMessage);
+        setLoading(false);
+        return ;
+      }else if(passwordError){
+        setErr(passwordError.errorMessage);
+        setLoading(false);
+        return ;
+      }
 
       try {
         const res = await fetch(
@@ -116,21 +136,21 @@ const Register = () => {
               <input
                 className="w-full text-black bg-inherit py-2 my-2 border-b border-gray-600 outline-none focus:outline-none focus:border-b-2"
                 type="text"
-                placeholder="Username"
+                placeholder="Username*"
                 name="username"
                 onChange={handleChange}
               />
               <input
                 className="w-full text-black bg-inherit py-2 my-2 border-b border-gray-600 outline-none focus:outline-none focus:border-b-2"
                 type="email"
-                placeholder="Email"
+                placeholder="Email*"
                 name="email"
                 onChange={handleChange}
               />
               <input
                 className="w-full text-black bg-inherit py-2 my-2 border-b border-gray-600 outline-none focus:outline-none focus:border-b-2"
                 type={showPassword ? "text" : "password"}
-                placeholder="Password"
+                placeholder="Password*"
                 name="password"
                 onChange={handleChange}
               />

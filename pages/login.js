@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import Head from "next/head";
 import Loading from "@/components/Loading";
+import { validateEmail, validateLoginPassword } from "@/utils/validation";
 
 const Login = () => {
   const router = useRouter();
@@ -31,6 +32,20 @@ const Login = () => {
       e.preventDefault();
       // console.log(form);
       setLoading(true);
+
+      const emailError = validateEmail(form.email);
+      const passwordError = validateLoginPassword(form.email);
+
+      if(emailError){
+        setErr(emailError.errorMessage);
+        setLoading(false);
+        return ;
+      }else if(passwordError){
+        setErr(passwordError.errorMessage);
+        setLoading(false);
+        return ;
+      }
+
       try {
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_SERVER_URI}/user/signin`,
@@ -119,14 +134,14 @@ const Login = () => {
               <input
                 className="w-full text-black bg-inherit py-2 my-2 border-b border-gray-600 outline-none focus:outline-none focus:border-b-2"
                 type="email"
-                placeholder="Email"
+                placeholder="Email*"
                 name="email"
                 onChange={handleChange}
               />
               <input
                 className="w-full text-black bg-inherit py-2 my-2 border-b border-gray-600 outline-none focus:outline-none focus:border-b-2"
                 type={showPassword ? "text" : "password"}
-                placeholder="Password"
+                placeholder="Password*"
                 name="password"
                 onChange={handleChange}
               />
