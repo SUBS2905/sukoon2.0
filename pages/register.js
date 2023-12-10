@@ -6,6 +6,8 @@ import Head from "next/head";
 import { Switch } from "@mui/material";
 import Loading from "@/components/Loading";
 import { validateEmail, validatePassword, validateUsername } from "@/utils/validation";
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
 const Register = () => {
   const [form, setForm] = useState({});
@@ -13,6 +15,9 @@ const Register = () => {
   const [err, setErr] = useState("");
   const [checked, setChecked] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  const router = useRouter();
+  const sessionToken = Cookies.get("sessionToken");
 
   const handleToggle = () => {
     setShowPassword(!showPassword);
@@ -101,6 +106,10 @@ const Register = () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [handleKeyDown]);
+
+  if(sessionToken){
+    router.replace("/");
+  }
 
   if (loading) {
     return <Loading type="bubbles" />;
