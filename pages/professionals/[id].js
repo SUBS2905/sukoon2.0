@@ -14,7 +14,7 @@ const ProfessionalDetails = () => {
   const { id } = router.query;
   const [professionalDetails, setProfessionalDetails] = useState(null);
   const [isLoading, setLoading] = useState(true);
-  const [emailSent, setEmailSent] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleNotify = async () => {
     setLoading(true);
@@ -31,7 +31,10 @@ const ProfessionalDetails = () => {
       );
       if (res.status === 200) {
         setLoading(false);
-        setEmailSent("Professional notified!");
+        setMessage("Professional notified!");
+      }else if(res.status === 409){
+        setLoading(false);
+        setMessage("Already consulting a professional");
       }
     } catch (err) {
       console.log(err);
@@ -156,7 +159,7 @@ const ProfessionalDetails = () => {
             </div>
           </div>
           <div className="w-full flex flex-col items-center justify-center mt-8">
-            <p className="font-semibold text-red-600 py-2">{emailSent}</p>
+            <p className="font-semibold text-red-600 py-2">{message}</p>
             <button
               className="bg-black text-white font-semibold p-2 px-16 rounded-md"
               onClick={handleNotify}
