@@ -47,14 +47,10 @@ export default function Resources() {
 
   //Handle Search from default buttons
   const handleDefaultSearch = async (searchTerm) => {
+    console.log("Chal raha hai");
     setLoading(true);
     const query = `${searchTerm} educational resources`;
     try {
-      if (searchQuery.length === 0) {
-        setLoading(false);
-        return;
-      }
-
       const googleRes = await fetch(
         `https://www.googleapis.com/customsearch/v1?key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}&cx=${process.env.NEXT_PUBLIC_SEARCH_ENGINE_ID}&q=${query}`
       );
