@@ -6,12 +6,16 @@ import { SearchIcon } from "@/components/icons";
 import CustomSearchCard from "@/components/CustomSearchCard";
 import { useState } from "react";
 import Loading from "@/components/Loading";
+import CustomVideoCard from "@/components/CustomVideoCard";
+import { formatDate, parseHTML } from "@/utils/utils";
 
 export default function Resources() {
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [resultData, setResultData] = useState([]);
+  const [googleResultData, setGoogleResultData] = useState([]);
+  const [youtubeResultData, setYoutubeResultData] = useState([]);
 
+  //Handle Search from input
   const handleSearch = async () => {
     setLoading(true);
     try {
@@ -19,12 +23,21 @@ export default function Resources() {
         setLoading(false);
         return;
       }
-      const res = await fetch(
-        `https://www.googleapis.com/customsearch/v1?key=${process.env.NEXT_PUBLIC_CUSTOM_SEARCH_API}&cx=${process.env.NEXT_PUBLIC_SEARCH_ENGINE_ID}&q=${searchQuery}`
+
+      const googleRes = await fetch(
+        `https://www.googleapis.com/customsearch/v1?key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}&cx=${process.env.NEXT_PUBLIC_SEARCH_ENGINE_ID}&q=${searchQuery}`
       );
 
-      const data = await res.json();
-      setResultData(data.items);
+      const youtubeRes = await fetch(
+        `https://www.googleapis.com/youtube/v3/search?key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}&q=${searchQuery}&part=snippet&type=video&maxResults=6`
+      );
+
+      const googleData = await googleRes.json();
+      const youtubeData = await youtubeRes.json();
+
+      setGoogleResultData(googleData.items);
+      setYoutubeResultData(youtubeData.items);
+
       setLoading(false);
     } catch (err) {
       console.error(err);
@@ -32,6 +45,7 @@ export default function Resources() {
     }
   };
 
+  //Handle Search from default buttons
   const handleDefaultSearch = async (searchTerm) => {
     setLoading(true);
     const query = `${searchTerm} educational resources`;
@@ -40,11 +54,21 @@ export default function Resources() {
         setLoading(false);
         return;
       }
-      const res = await fetch(
-        `https://www.googleapis.com/customsearch/v1?key=${process.env.NEXT_PUBLIC_CUSTOM_SEARCH_API}&cx=${process.env.NEXT_PUBLIC_SEARCH_ENGINE_ID}&q=${query}`
+
+      const googleRes = await fetch(
+        `https://www.googleapis.com/customsearch/v1?key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}&cx=${process.env.NEXT_PUBLIC_SEARCH_ENGINE_ID}&q=${query}`
       );
-      const data = await res.json();
-      setResultData(data.items);
+
+      const youtubeRes = await fetch(
+        `https://www.googleapis.com/youtube/v3/search?key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}&q=${query}&part=snippet&type=video&maxResults=6`
+      );
+
+      const googleData = await googleRes.json();
+      const youtubeData = await youtubeRes.json();
+
+      setGoogleResultData(googleData.items);
+      setYoutubeResultData(youtubeData.items);
+
       setLoading(false);
     } catch (err) {
       console.error(err);
@@ -107,7 +131,7 @@ export default function Resources() {
             </div>
           </div>
           <div className="w-full flex flex-col gap-4 items-center justify-center my-8">
-            {resultData?.map((searchResult, index) => (
+            {googleResultData?.map((searchResult, index) => (
               <CustomSearchCard
                 key={index}
                 title={searchResult.title}
@@ -117,8 +141,20 @@ export default function Resources() {
               />
             ))}
           </div>
+          <div className="w-full flex flex-wrap gap-8 items-center justify-around mt-8">
+            {youtubeResultData?.map((searchResult, index) => (
+              <CustomVideoCard
+                key={index}
+                title={parseHTML(searchResult.snippet.title)}
+                thumbnail={searchResult.snippet.thumbnails.high.url}
+                channelTitle={searchResult.snippet.channelTitle}
+                videoId={searchResult.id.videoId}
+                publishTime={formatDate(searchResult.snippet.publishTime)}
+              />
+            ))}
+          </div>
         </Layout>
-        <Footer />
+        <Footer className="bg-gray-700 text-white" />
       </main>
     </>
   );
