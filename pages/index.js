@@ -52,6 +52,14 @@ export default function Home() {
           />
         </LayoutDark>
         <Footer />
+        <script
+          defer
+          src="https://cdn.botpress.cloud/webchat/v1/inject.js"
+        ></script>
+        <script
+          src="https://mediafiles.botpress.cloud/0182e5a5-1482-4185-aaa2-2c2261a93adc/webchat/config.js"
+          defer
+        ></script>
       </main>
     </>
   );
